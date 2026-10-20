@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17102e">
+<title>ZOGGY KARTUN | Cartoon Store</title>
+<style>
+:root{--bg:#100c20;--panel:#1e1735;--purple:#8b5cf6;--pink:#ec4899;--text:#fff;--muted:#c5bdd9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+header{background:#19112d;padding:18px 5%;position:sticky;top:0;z-index:5;border-bottom:1px solid #392958}
+.logo{font-size:25px;font-weight:900;color:#f0abfc}
+nav{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+button,a,.btn{cursor:pointer}
+button,.btn{background:var(--purple);color:white;border:0;padding:11px 15px;border-radius:10px;font-weight:bold;text-decoration:none}
+button:hover,.btn:hover{opacity:.85}
+.secondary{background:#37274f}
+input,select,textarea{width:100%;padding:12px;margin:5px 0 12px;border:1px solid #51406c;border-radius:9px;background:#171027;color:white}
+main{max-width:1200px;margin:auto;padding:22px}
+.hero{padding:30px 22px;border-radius:18px;background:linear-gradient(130deg,#5224a5,#b52f83,#ef7c4a);margin-bottom:25px}
+.hero h1{font-size:clamp(28px,5vw,45px);margin:8px 0}
+.hero p{line-height:1.6}
+.section{margin:30px 0}
+h2{font-size:23px}
+.muted{color:var(--muted);font-size:14px;line-height:1.6}
+.tools{display:grid;grid-template-columns:2fr 1fr;gap:10px}
+.categories{display:flex;gap:9px;flex-wrap:wrap}
+.category{background:#302347}
+.category.active{background:var(--pink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card,.panel{background:var(--panel);padding:15px;border:1px solid #3d2c56;border-radius:15px;min-width:0}
+.card img{width:100%;height:165px;object-fit:cover;border-radius:10px;background:#302347}
+.card h3{margin-bottom:5px}
+.price{font-size:20px;color:#f9a8d4;font-weight:bold}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.card-actions button{flex:1}
+.upload-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.upload-box{background:#201735;border:1px dashed #a78bfa;border-radius:12px;padding:10px;min-width:0}
+.upload-box img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px}
+.upload-box input{font-size:12px}
+.cart-item{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #443355}
+footer{text-align:center;padding:28px;color:var(--muted);border-top:1px solid #392958}
+.badge{background:#392650;padding:5px 8px;border-radius:7px;font-size:12px}
+.hide{display:none!important}
+.notice{padding:12px;border-radius:10px;background:#302347;margin:12px 0}
+label{font-size:14px}
+@media(max-width:550px){main{padding:14px}.upload-grid{grid-template-columns:1fr}.tools{grid-template-columns:1fr}header{padding:15px}.logo{font-size:22px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🎨 ZOGGY KARTUN</div>
+  <div class="muted">Your Cartoon Digital Store</div>
+  <nav>
+    <a class="btn" href="#home">Home</a>
+    <a class="btn secondary" href="#products">Products</a>
+    <a class="btn secondary" href="#uploads">Photo Upload</a>
+    <a class="btn secondary" href="#cart">Cart (<span id="cartCount">0</span>)</a>
+    <button class="secondary" id="languageBtn">বাংলা / English</button>
+  </nav>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <span class="badge">WELCOME TO ZOGGY KARTUN</span>
+    <h1 id="heroTitle">তোমার কার্টুন দুনিয়ায় স্বাগতম!</h1>
+    <p id="heroText">Cartoon backgrounds, characters, props, bundles এবং ভিডিও এক জায়গায় খুঁজে নাও।</p>
+    <a href="#products" class="btn" id="shopBtn">এখনই দেখো →</a>
+  </section>
+
+  <section class="section" id="uploads">
+    <h2>📸 তিনটি ছবি আপলোড</h2>
+    <p class="muted">মোবাইলের গ্যালারি থেকে সর্বোচ্চ ৩টি ছবি বেছে নাও। নির্বাচিত ছবির প্রিভিউ এখানে দেখা যাবে।</p>
+    <div class="upload-grid">
+      <div class="upload-box">
+        <h3>ছবি ১</h3>
+        <img id="preview1" alt="ছবি ১-এর প্রিভিউ"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect width='100%25' height='100%25' fill='%23302447'/%3E%3Ctext x='50%25' y='50%25' fill='white' text-anchor='middle' font-size='18'%3EPhoto 1%3C/text%3E%3C/svg%3E">
+        <label for="photo1">গ্যালারি থেকে ছবি বেছে নাও</label>
+        <input id="photo1" type="file" accept="image/*">
+      </div>
+      <div class="upload-box">
+        <h3>ছবি ২</h3>
+        <img id="preview2" alt="ছবি ২-এর প্রিভিউ"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect width='100%25' height='100%25' fill='%23302447'/%3E%3Ctext x='50%25' y='50%25' fill='white' text-anchor='middle' font-size='18'%3EPhoto 2%3C/text%3E%3C/svg%3E">
+        <label for="photo2">গ্যালারি থেকে ছবি বেছে নাও</label>
+        <input id="photo2" type="file" accept="image/*">
+      </div>
+      <div class="upload-box">
+        <h3>ছবি ৩</h3>
+        <img id="preview3" alt="ছবি ৩-এর প্রিভিউ"
+          src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200'%3E%3Crect width='100%25' height='100%25' fill='%23302447'/%3E%3Ctext x='50%25' y='50%25' fill='white' text-anchor='middle' font-size='18'%3EPhoto 3%3C/text%3E%3C/svg%3E">
+        <label for="photo3">গ্যালারি থেকে ছবি বেছে নাও</label>
+        <input id="photo3" type="file" accept="image/*">
+      </div>
+    </div>
+    <div class="notice" id="uploadStatus">ছবি নির্বাচন করলে প্রিভিউ দেখা যাবে। এটি অনলাইন সার্ভারে আপলোড নয়।</div>
+  </section>
+
+  <section class="section" id="products">
+    <h2 id="productHeading">🛍️ আমাদের প্রোডাক্ট</h2>
+    <div class="tools">
+      <input id="search" type="search" placeholder="🔍 পণ্যের নাম খুঁজুন...">
+      <select id="sort">
+        <option value="default">সাজানো: ডিফল্ট</option>
+        <option value="low">দাম: কম থেকে বেশি</option>
+        <option value="high">দাম: বেশি থেকে কম</option>
+      </select>
+    </div>
+    <div class="categories section" id="categories"></div>
+    <div class="grid" id="productGrid"></div>
+    <p id="emptyMessage" class="muted hide">কোনো পণ্য পাওয়া যায়নি।</p>
+  </section>
+
+  <section class="section panel" id="cart">
+    <h2>🛒 তোমার কার্ট</h2>
+    <div id="cartItems"></div>
+    <p>মোট: <strong id="subtotal">₹0</strong></p>
+    <label for="coupon">কুপন কোড</label>
+    <input id="coupon" placeholder="যেমন: ZOGGY10">
+    <button id="applyCoupon" class="secondary">কুপন প্রয়োগ করো</button>
+    <p id="couponStatus" class="muted">ডেমো কুপন: ZOGGY10 (১০% ছাড়)</p>
+    <p>ছাড়: <strong id="discount">₹0</strong></p>
+    <h3>সর্বমোট: <span id="total">₹0</span></h3>
+    <label for="customerName">তোমার নাম</label>
+    <input id="customerName" placeholder="নাম লিখো">
+    <label for="customerNote">অর্ডার সম্পর্কে নোট</label>
+    <textarea id="customerNote" rows="2" placeholder="কোনো বিশেষ নির্দেশ থাকলে লেখো"></textarea>
+    <button id="checkout">WhatsApp-এ অর্ডার করো</button>
+    <p class="muted">এটি WhatsApp-এ অর্ডারের খসড়া পাঠানোর ব্যবস্থা। অনলাইন পেমেন্ট স্বয়ংক্রিয়ভাবে নেওয়া হয় না।</p>
+  </section>
+
+  <section class="section panel" id="about">
+    <h2>ℹ️ About ZOGGY KARTUN</h2>
+    <p class="muted">কার্টুন ডিজিটাল পণ্য, ব্যাকগ্রাউন্ড, চরিত্র, প্রপস, বান্ডল ও ভিডিওর জন্য একটি নমুনা অনলাইন স্টোর। আসল পণ্য ও দাম Admin-এর মাধ্যমে যোগ করতে হবে।</p>
+    <a class="btn" href="https://wa.me/918282892204" target="_blank" rel="noopener">WhatsApp-এ যোগাযোগ</a>
+  </section>
+</main>
+
+<footer>© <span id="year"></span> ZOGGY KARTUN • Made for cartoon creators</footer>
+
+<script>
+"use strict";
+
+const WHATSAPP_NUMBER = "918282892204";
+
+const categories = [
+  "All",
+  "Cartoon Backgrounds",
+  "Cartoon Props",
+  "Cartoon Characters",
+  "Cartoon Character Packs",
+  "Background Packs",
+  "Cartoon Props Packs",
+  "Video Section"
+];
+
+const products = [
+  {id:1,name:"Fantasy Cartoon Background",category:"Cartoon Backgrounds",price:99,description:"রঙিন ফ্যান্টাসি ব্যাকগ্রাউন্ডের নমুনা।",image:"https://placehold.co/600x400/54318a/ffffff?text=Cartoon+Background"},
+  {id:2,name:"Cartoon Prop Collection",category:"Cartoon Props",price:49,description:"কার্টুন প্রপসের নমুনা সংগ্রহ।",image:"https://placehold.co/600x400/176b75/ffffff?text=Cartoon+Props"},
+  {id:3,name:"Funny Cartoon Character",category:"Cartoon Characters",price:79,description:"একটি কার্টুন চরিত্রের নমুনা।",image:"https://placehold.co/600x400/9d376e/ffffff?text=Character"},
+  {id:4,name:"Character Starter Pack",category:"Cartoon Character Packs",price:199,description:"চরিত্র প্যাকের নমুনা।",image:"https://placehold.co/600x400/7d4b27/ffffff?text=Character+Pack"},
+  {id:5,name:"Background Mega Pack",category:"Background Packs",price:249,description:"ব্যাকগ্রাউন্ড বান্ডলের নমুনা।",image:"https://placehold.co/600x400/285b8e/ffffff?text=Background+Pack"},
+  {id:6,name:"Props Bundle",category:"Cartoon Props Packs",price:149,description:"প্রপস বান্ডলের নমুনা।",image:"https://placehold.co/600x400/387348/ffffff?text=Props+Bundle"},
+  {id:7,name:"Cartoon Animation Tutorial",category:"Video Section",price:299,description:"ভিডিও কোর্সের নমুনা। আসল ভিডিও যোগ করতে হবে।",image:"https://placehold.co/600x400/8a3b3b/ffffff?text=Video+Course"}
+];
+
+let activeCategory = "All";
+let cart = [];
+let couponApplied = false;
+let english = false;
+
+const $ = id => document.getElementById(id);
+const money = value => "₹" + Math.round(value).toLocaleString("en-IN");
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  })[char]);
+}
+
+function renderCategories() {
+  $("categories").innerHTML = categories.map(category =>
+    `<button class="category ${category===activeCategory?"active":""}"
+      data-category="${escapeHTML(category)}">${escapeHTML(category)}</button>`
+  ).join("");
+}
+
+function renderProducts() {
+  const query = $("search").value.trim().toLowerCase();
+  let shown = products.filter(product => {
+    const categoryMatch = activeCategory === "All" || product.category === activeCategory;
+    const queryMatch = (product.name + " " + product.description + " " + product.category).toLowerCase().includes(query);
+    return categoryMatch && queryMatch;
+  });
+
+  if ($("sort").value === "low") shown.sort((a,b)=>a.price-b.price);
+  if ($("sort").value === "high") shown.sort((a,b)=>b.price-a.price);
+
+  $("productGrid").innerHTML = shown.map(product => `
+    <article class="card">
+      <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}" loading="lazy"
+        onerror="this.src='https://placehold.co/600x400/302347/ffffff?text=ZOGGY+KARTUN'">
+      <span class="badge">${escapeHTML(product.category)}</span>
+      <h3>${escapeHTML(product.name)}</h3>
+      <p class="muted">${escapeHTML(product.description)}</p>
+      <div class="price">${money(product.price)}</div>
+      <div class="card-actions">
+        <button data-add="${product.id}">কার্টে যোগ</button>
+        <button class="secondary" data-buy="${product.id}">এখনই কিনুন</button>
+      </div>
+    </article>
+  `).join("");
+
+  $("emptyMessage").classList.toggle("hide", shown.length > 0);
+}
+
+function renderCart() {
+  $("cartCount").textContent = cart.reduce((sum,item)=>sum+item.qty,0);
+
+  $("cartItems").innerHTML = cart.length ? cart.map(item => `
+    <div class="cart-item">
+      <div>
+        <strong>${escapeHTML(item.name)}</strong>
+        <div class="muted">${money(item.price)} × ${item.qty}</div>
+      </div>
+      <div>
+        <strong>${money(item.price*item.qty)}</strong><br>
+        <button class="secondary" data-remove="${item.id}">বাদ দাও</button>
+      </div>
+    </div>
+  `).join("") : '<p class="muted">তোমার কার্ট এখন খালি।</p>';
+
+  const subtotal = cart.reduce((sum,item)=>sum+item.price*item.qty,0);
+  const discount = couponApplied ? subtotal*0.10 : 0;
+
+  $("subtotal").textContent = money(subtotal);
+  $("discount").textContent = money(discount);
+  $("total").textContent = money(subtotal-discount);
+}
+
+function addToCart(id) {
+  const product = products.find(item=>item.id===Number(id));
+  if (!product) return;
+
+  const existing = cart.find(item=>item.id===product.id);
+  if (existing) existing.qty++;
+  else cart.push({...product,qty:1});
+
+  renderCart();
+}
+
+$("categories").addEventListener("click",event=>{
+  const button = event.target.closest("[data-category]");
+  if (!button) return;
+  activeCategory = button.dataset.category;
+  renderCategories();
+  renderProducts();
+});
+
+$("productGrid").addEventListener("click",event=>{
+  const add = event.target.closest("[data-add]");
+  const buy = event.target.closest("[data-buy]");
+
+  if (add) {
+    addToCart(add.dataset.add);
+    $("cart").scrollIntoView({behavior:"smooth"});
+  }
+
+  if (buy) {
+    addToCart(buy.dataset.buy);
+    $("cart").scrollIntoView({behavior:"smooth"});
+  }
+});
+
+$("cartItems").addEventListener("click",event=>{
+  const button = event.target.closest("[data-remove]");
+  if (!button) return;
+
+  cart = cart.filter(item=>item.id!==Number(button.dataset.remove));
+  renderCart();
+});
+
+$("search").addEventListener("input",renderProducts);
+$("sort").addEventListener("change",renderProducts);
+
+$("applyCoupon").addEventListener("click",()=>{
+  const code = $("coupon").value.trim().toUpperCase();
+  couponApplied = code === "ZOGGY10";
+
+  $("couponStatus").textContent = couponApplied
+    ? "কুপন প্রয়োগ হয়েছে: ১০% ডেমো ছাড়।"
+    : "কুপন সঠিক নয়। ZOGGY10 চেষ্টা করো।";
+
+  renderCart();
+});
+
+$("checkout").addEventListener("click",()=>{
+  if (!cart.length) {
+    alert("আগে কার্টে অন্তত একটি পণ্য যোগ করো।");
+    return;
+  }
+
+  const name = $("customerName").value.trim();
+  if (!name) {
+    alert("অর্ডারের জন্য তোমার নাম লিখো।");
+    $("customerName").focus();
+    return;
+  }
+
+  const subtotal = cart.reduce((sum,item)=>sum+item.price*item.qty,0);
+  const discount = couponApplied ? subtotal*0.10 : 0;
+  const total = subtotal-discount;
+
+  const lines = cart.map(item =>
+    `${item.name} × ${item.qty} = ${money(item.price*item.qty)}`
+  );
+
+  const message = [
+    "ZOGGY KARTUN - Order Request",
+    "Name: "+name,
+    "",
+    ...lines,
+    "",
+    "Subtotal: "+money(subtotal),
+    "Discount: "+money(discount),
+    "Total: "+money(total),
+    "Note: "+($("customerNote").value.trim() || "None"),
+    "",
+    "Please confirm availability and payment details."
+  ].join("\n");
+
+  window.open("https://wa.me/"+WHATSAPP_NUMBER+"?text="+encodeURIComponent(message),"_blank");
+});
+
+document.querySelectorAll('input[type="file"]').forEach(input=>{
+  input.addEventListener("change",()=>{
+    const file = input.files && input.files[0];
+    if (!file) return;
+
+    if (!file.type.startsWith("image/")) {
+      alert("শুধু ছবি নির্বাচন করো।");
+      input.value="";
+      return;
+    }
+
+    if (file.size > 5*1024*1024) {
+      alert("ছবির সাইজ ৫ MB-এর মধ্যে রাখো।");
+      input.value="";
+      return;
+    }
+
+    const previewId = "preview"+input.id.replace("photo","");
+    const reader = new FileReader();
+
+    reader.onload = event=>{
+      $(previewId).src = event.target.result;
+      $("uploadStatus").textContent =
+        file.name+" নির্বাচন করা হয়েছে। ছবিটি এই ব্রাউজারে শুধু প্রিভিউ হচ্ছে; অনলাইনে স্থায়ীভাবে আপলোড হয়নি।";
+    };
+
+    reader.onerror = ()=>alert("ছবি পড়তে সমস্যা হয়েছে। আবার চেষ্টা করো।");
+    reader.readAsDataURL(file);
+  });
+});
+
+$("languageBtn").addEventListener("click",()=>{
+  english = !english;
+  $("heroTitle").textContent = english
+    ? "Welcome to Your Cartoon World!"
+    : "তোমার কার্টুন দুনিয়ায় স্বাগতম!";
+  $("heroText").textContent = english
+    ? "Find cartoon backgrounds, characters, props, bundles and videos in one place."
+    : "Cartoon backgrounds, characters, props, bundles এবং ভিডিও এক জায়গায় খুঁজে নাও।";
+  $("shopBtn").textContent = english ? "Shop Now →" : "এখনই দেখো →";
+  $("productHeading").textContent = english ? "🛍️ Our Products" : "🛍️ আমাদের প্রোডাক্ট";
+});
+
+$("year").textContent = new Date().getFullYear();
+
+renderCategories();
+renderProducts();
+renderCart();
+</script>
+</body>
+    </html>
+  
