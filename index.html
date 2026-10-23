@@ -110,9 +110,12 @@ categories.forEach((c,cat)=>{
 let products=JSON.parse(localStorage.getItem("zgProducts")||"null")||defaults;
   products[9].name = "Drawing Cartoon to Full Course";
 products[9].price = 499;
+products[9].image = "file_00000000fab8820b920f47ef1c3e6773.png";
 
 products[10].name = "Advanced Cartoon Animation Course";
 products[10].price = 999;
+products[10].image = "file_0000000082b48211823238f89f8ddc23.png";
+ localStorage.setItem("zgProducts", JSON.stringify(products)); 
 
 localStorage.setItem("zgProducts", JSON.stringify(products));
 let cart={};
