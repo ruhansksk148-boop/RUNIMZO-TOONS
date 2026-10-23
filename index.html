@@ -4,56 +4,71 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZOGGY KARTUN | Cartoon Asset Store</title>
+<meta name="theme-color" content="#121629">
+<title>ZOGGY KARTUN - Cartoon Asset Store</title>
 <style>
-:root{--bg:#101322;--panel:#1b2035;--card:#242b43;--text:#f5f6ff;--muted:#aeb6d0;--accent:#ffca55;--blue:#6e8cff;--red:#ff6c7b}
+:root{--bg:#101322;--panel:#1b2035;--card:#242b43;--text:#f5f6ff;--muted:#b5bdd5;--gold:#ffca55;--blue:#718cff;--red:#ff687a;--green:#50d6a0}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,"Noto Sans Bengali",sans-serif}
 button,input,select,textarea{font:inherit}
-button{cursor:pointer;border:0;border-radius:9px;padding:11px 14px;font-weight:bold}
-.primary{background:var(--accent);color:#171717}
+button{cursor:pointer;border:0;border-radius:9px;padding:11px 13px;font-weight:700}
+button:disabled{opacity:.45;cursor:not-allowed}
+.primary{background:var(--gold);color:#171717}
 .secondary{background:var(--blue);color:white}
-.danger{background:var(--red);color:#24080d}
-header{background:#191d30;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid #303651}
-.logo{font-size:24px;font-weight:900;color:var(--accent)}
+.danger{background:var(--red);color:#2a1014}
+.success{background:var(--green);color:#10251d}
+header{background:#191d30;border-bottom:1px solid #343b56;padding:15px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{font-size:25px;font-weight:900;color:var(--gold)}
 .logo span{color:white}
-header p{margin:5px 0 0;color:var(--muted);font-size:13px}
+header p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select,input,textarea{width:100%;background:#111629;color:white;border:1px solid #414966;border-radius:9px;padding:11px}
+select option{background:#111629}
+.lang{width:auto;min-width:105px}
 nav{display:flex;gap:8px;flex-wrap:wrap;padding:13px 5%;background:#15192a}
 nav button{background:#292f49;color:white}
-nav button.active{background:var(--accent);color:#171717}
-main{max-width:1200px;margin:auto;padding:22px 5%}
-.hero{background:linear-gradient(130deg,#303c73,#642f76);padding:26px;border-radius:17px;margin-bottom:22px}
-.hero h1{font-size:clamp(25px,5vw,42px);margin:0 0 10px}
+nav button.active{background:var(--gold);color:#171717}
+main{max-width:1250px;margin:auto;padding:22px 5%}
+.hero{background:linear-gradient(130deg,#303c73,#642f76);padding:27px;border-radius:17px;margin-bottom:22px}
+.hero h1{font-size:clamp(27px,5vw,43px);margin:0 0 10px}
 .hero p{line-height:1.7;color:#f0eaff}
 .stats{display:flex;gap:10px;flex-wrap:wrap}
 .stat{background:#11182c99;padding:10px 13px;border-radius:9px}
 .toolbar{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
-.toolbar input,.toolbar select{flex:1;min-width:150px}
-input,select,textarea{width:100%;background:#111629;color:white;border:1px solid #414966;border-radius:9px;padding:12px}
-input[type=file]{padding:10px}
+.toolbar>*{flex:1;min-width:140px}
 .section-title{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
-h2{font-size:23px}
-.muted{color:var(--muted);font-size:14px;line-height:1.6}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:15px}
-.card{background:var(--card);border:1px solid #343c5a;border-radius:13px;overflow:hidden}
-.card img{width:100%;height:180px;object-fit:contain;background:#171c2e;display:block}
+h2{font-size:22px}
+.muted{color:var(--muted);font-size:13px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:15px}
+.card{background:var(--card);border:1px solid #343c5a;border-radius:13px;overflow:hidden;min-width:0}
+.card>img{width:100%;height:180px;object-fit:contain;background:#171c2e;display:block}
 .card-body{padding:12px}
 .card h3{margin:0 0 7px;overflow-wrap:anywhere}
-.price{color:var(--accent);font-size:18px;font-weight:bold;margin:10px 0}
-.actions{display:flex;gap:7px;flex-wrap:wrap}
+.price{color:var(--gold);font-size:19px;font-weight:bold;margin:10px 0}
+.badge{display:inline-block;border-radius:20px;padding:4px 8px;background:#343d5b;font-size:11px;margin:2px 0}
+.actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
 .actions button{flex:1;font-size:12px;padding:9px 7px}
 .empty{border:1px dashed #4a5270;border-radius:12px;padding:30px;text-align:center;color:var(--muted);grid-column:1/-1}
 .panel{background:var(--panel);border:1px solid #343c5a;border-radius:14px;padding:18px;margin:22px 0}
 .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.field{display:flex;flex-direction:column;gap:7px}
+.field{display:flex;flex-direction:column;gap:7px;min-width:0}
 .field.full{grid-column:1/-1}
-label{font-size:14px;color:#dce1f5}
+label{font-size:13px;color:#dce1f5}
 .preview{display:none;max-width:100%;max-height:230px;object-fit:contain;border-radius:10px;background:#111629}
 .hidden{display:none!important}
 hr{border:0;border-top:1px solid #343c5a;margin:22px 0}
+.rowline{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.cart-item,.order-item{background:#242b43;border-radius:10px;padding:12px;margin:9px 0}
+.cart-item{display:flex;gap:12px;align-items:center}
+.cart-item img{width:70px;height:70px;object-fit:contain;background:#171c2e;border-radius:7px}
+.cart-item .info{flex:1;min-width:0}
+.cart-item h3{margin:0 0 5px;font-size:15px;overflow-wrap:anywhere}
+.cart-item button{padding:7px 10px}
+.preview-box{background:#111629;padding:10px;border-radius:10px}
+#notice{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);background:#fff;color:#111;padding:12px 18px;border-radius:10px;display:none;z-index:50;max-width:92%;box-shadow:0 5px 25px #0008}
 footer{text-align:center;color:var(--muted);padding:30px 15px;background:#171a2a;margin-top:30px}
-#notice{position:fixed;bottom:15px;left:50%;transform:translateX(-50%);background:#fff;color:#111;padding:12px 18px;border-radius:10px;display:none;z-index:10;max-width:90%;box-shadow:0 5px 25px #0008}
-@media(max-width:550px){.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.hero{padding:20px}.card img{height:150px}}
+a{color:#a9bcff}
+@media(max-width:550px){.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.hero{padding:20px}.card>img{height:150px}.panel{padding:13px}header{padding:14px 4%}main{padding:18px 4%}}
 </style>
 </head>
 <body>
@@ -61,118 +76,174 @@ footer{text-align:center;color:var(--muted);padding:30px 15px;background:#171a2a
 <header>
   <div>
     <div class="logo">ZOGGY <span>KARTUN</span></div>
-    <p>2D Cartoon Assets • Backgrounds • Animation Materials</p>
+    <p>2D Cartoon Characters • Backgrounds • Animation Assets</p>
   </div>
-  <button class="primary" onclick="goToAdmin()">⚙️ Admin Panel</button>
+  <div class="header-actions">
+    <select id="language" class="lang" aria-label="Language" onchange="setLanguage(this.value)">
+      <option value="bn">বাংলা</option>
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+    </select>
+    <button class="primary" onclick="goTo('adminPanel')" data-i18n="admin">⚙️ Admin Panel</button>
+    <button class="secondary" onclick="goTo('cartPanel')">🛒 <span data-i18n="cart">Cart</span> (<span id="cartCount">0</span>)</button>
+  </div>
 </header>
 
 <nav id="categoryNav">
-  <button class="active" data-category="all" onclick="showCategory('all',this)">🏠 সব ছবি</button>
-  <button data-category="characters" onclick="showCategory('characters',this)">🎭 Cartoon Characters</button>
-  <button data-category="backgrounds" onclick="showCategory('backgrounds',this)">🏞️ Backgrounds</button>
-  <button data-category="props" onclick="showCategory('props',this)">🪑 Cartoon Props</button>
-  <button data-category="materials" onclick="showCategory('materials',this)">🎬 Animation Materials</button>
+  <button class="active" data-category="all" onclick="showCategory('all',this)" data-i18n="all">🏠 সব ছবি</button>
+  <button data-category="characters" onclick="showCategory('characters',this)" data-i18n="characters">🎭 Cartoon Characters</button>
+  <button data-category="backgrounds" onclick="showCategory('backgrounds',this)" data-i18n="backgrounds">🏞️ Backgrounds</button>
+  <button data-category="props" onclick="showCategory('props',this)" data-i18n="props">🪑 Cartoon Props</button>
+  <button data-category="materials" onclick="showCategory('materials',this)" data-i18n="materials">🎬 Animation Materials</button>
 </nav>
 
 <main>
   <section class="hero">
-    <h1>Welcome to ZOGGY KARTUN!</h1>
-    <p>তোমার 2D কার্টুন অ্যানিমেশনের জন্য চরিত্র, ব্যাকগ্রাউন্ড, প্রপস এবং অন্যান্য অ্যাসেট এক জায়গায়। ক্যাটাগরি বেছে নিয়ে ছবি দেখো।</p>
+    <h1 data-i18n="welcome">Welcome to ZOGGY KARTUN!</h1>
+    <p data-i18n="heroText">তোমার 2D কার্টুন অ্যানিমেশনের জন্য চরিত্র, ব্যাকগ্রাউন্ড, প্রপস ও অ্যানিমেশন অ্যাসেট এক জায়গায়।</p>
     <div class="stats">
-      <div class="stat">🖼️ মোট ছবি: <b id="totalCount">0</b></div>
-      <div class="stat">📂 ক্যাটাগরি: <b>4</b></div>
+      <div class="stat">🖼️ <span data-i18n="totalAssets">মোট অ্যাসেট</span>: <b id="totalCount">0</b></div>
+      <div class="stat">📂 <span data-i18n="categories">ক্যাটাগরি</span>: <b>4</b></div>
+      <div class="stat">🛒 <span data-i18n="cart">Cart</span>: <b id="heroCartCount">0</b></div>
     </div>
   </section>
 
-  <section>
+  <section id="storeSection">
     <div class="section-title">
       <h2 id="listTitle">সব ছবি</h2>
-      <span class="muted">তোমার আপলোড করা ছবি এখানে দেখা যাবে</span>
+      <span class="muted" data-i18n="storeHint">ছবি দেখতে বা অর্ডার করতে একটি অ্যাসেট বেছে নাও।</span>
     </div>
     <div class="toolbar">
-      <input id="searchInput" placeholder="🔍 ছবির নাম দিয়ে খুঁজুন..." oninput="renderProducts()">
+      <input id="searchInput" placeholder="🔍 ছবির নাম দিয়ে খুঁজুন..." oninput="renderProducts()" data-i18n-placeholder="search">
       <select id="sortSelect" onchange="renderProducts()">
-        <option value="new">নতুন ছবি আগে</option>
-        <option value="name">নাম অনুযায়ী</option>
-        <option value="low">কম দাম আগে</option>
-        <option value="high">বেশি দাম আগে</option>
+        <option value="new" data-i18n="newest">নতুন আগে</option>
+        <option value="name" data-i18n="nameSort">নাম অনুযায়ী</option>
+        <option value="low" data-i18n="lowPrice">কম দাম আগে</option>
+        <option value="high" data-i18n="highPrice">বেশি দাম আগে</option>
+      </select>
+      <select id="priceFilter" onchange="renderProducts()">
+        <option value="all" data-i18n="allPrices">সব দাম</option>
+        <option value="free" data-i18n="freeOnly">শুধু Free</option>
+        <option value="paid" data-i18n="paidOnly">শুধু Paid</option>
       </select>
     </div>
     <div class="grid" id="productGrid"></div>
   </section>
 
+  <section class="panel" id="cartPanel">
+    <div class="section-title">
+      <h2>🛒 <span data-i18n="cart">Cart</span></h2>
+      <button class="secondary" onclick="renderCart()" data-i18n="refresh">Refresh</button>
+    </div>
+    <div id="cartItems"></div>
+    <div class="rowline">
+      <h3><span data-i18n="total">Total</span>: <span id="cartTotal">₹0</span></h3>
+      <div class="actions">
+        <button class="danger" onclick="clearCart()" data-i18n="clearCart">Clear Cart</button>
+        <button class="primary" onclick="checkoutWhatsApp()" data-i18n="checkout">WhatsApp Checkout</button>
+      </div>
+    </div>
+    <p class="muted" data-i18n="cartNote">WhatsApp অর্ডার পাঠালে সেটি পেমেন্ট নিশ্চিত করে না। অর্ডার গ্রহণ ও পেমেন্ট আলাদাভাবে যাচাই করতে হবে।</p>
+  </section>
+
+  <section class="panel" id="ordersPanel">
+    <div class="section-title">
+      <h2>📋 <span data-i18n="orderHistory">অর্ডার হিস্ট্রি</span></h2>
+      <button class="secondary" onclick="renderOrders()" data-i18n="refresh">Refresh</button>
+    </div>
+    <p class="muted" data-i18n="historyNote">এই ডিভাইস থেকে তৈরি করা অর্ডারের রেকর্ড এখানে থাকবে।</p>
+    <div id="orderHistory"></div>
+  </section>
+
   <section class="panel" id="adminPanel">
     <div class="section-title">
-      <h2>⚙️ Admin Panel — ছবি আপলোড</h2>
-      <button class="secondary" onclick="toggleAdmin()">প্যানেল দেখান/লুকান</button>
+      <h2>⚙️ <span data-i18n="admin">Admin Panel</span></h2>
+      <button class="secondary" onclick="toggleAdmin()" data-i18n="showHide">Show / Hide</button>
     </div>
-    <p class="muted">প্রতিটি ক্যাটাগরির জন্য আলাদা আপলোড ফর্ম আছে। নিজের ফোনের গ্যালারি থেকে ছবি বেছে নিয়ে নাম ও দাম দিয়ে আপলোড করো।</p>
+    <p class="muted" data-i18n="adminIntro">নিজের অ্যাসেট আপলোড, পরিবর্তন, ডিলিট এবং দোকানের সেটিংস পরিচালনা করো।</p>
 
     <div id="adminContent">
       <div class="field">
-        <label for="adminPassword">অ্যাডমিন পাসওয়ার্ড</label>
-        <input id="adminPassword" type="password" placeholder="ডেমো পাসওয়ার্ড লিখুন">
-        <button class="secondary" onclick="loginAdmin()">Admin Unlock</button>
-        <p class="muted">ডেমো পাসওয়ার্ড: <b>zoggy123</b>। এটি নিরাপদ সার্ভার-ভিত্তিক লগইন নয়।</p>
+        <label data-i18n="passwordLabel" for="adminPassword">Admin Password</label>
+        <input id="adminPassword" type="password" autocomplete="current-password" placeholder="পাসওয়ার্ড লিখুন">
+        <button class="secondary" onclick="loginAdmin()" data-i18n="unlock">Admin Unlock</button>
+        <p class="muted" data-i18n="demoPassword">ডেমো পাসওয়ার্ড: zoggy123। এটি নিরাপদ সার্ভার-ভিত্তিক লগইন নয়।</p>
+        <button class="danger hidden" id="logoutButton" onclick="logoutAdmin()" data-i18n="logout">Logout</button>
       </div>
+
       <div id="uploadForms" class="hidden">
         <hr>
-        <h3>🎭 ১. Cartoon Characters আপলোড</h3>
-        <form class="uploadForm" data-category="characters">
+        <h3 data-i18n="productEditor">➕ অ্যাসেট আপলোড / এডিট</h3>
+        <p class="muted" data-i18n="editorHint">ছবি বেছে নাও। চাইলে আলাদা ডিজিটাল ফাইলও যুক্ত করতে পারো। আপলোডের আগে প্রিভিউ দেখা যাবে।</p>
+
+        <form id="productForm">
+          <input type="hidden" name="editId" id="editId">
           <div class="form-grid">
-            <div class="field full"><label>চরিত্রের ছবি</label><input type="file" name="image" accept="image/*" required><img class="preview" alt="ছবির প্রিভিউ"></div>
-            <div class="field"><label>চরিত্রের নাম</label><input name="name" placeholder="যেমন: Gopal Character" required></div>
-            <div class="field"><label>দাম (₹)</label><input name="price" type="number" min="0" value="0" required></div>
-            <div class="field full"><label>বিবরণ</label><textarea name="description" placeholder="চরিত্র সম্পর্কে লিখুন"></textarea></div>
-            <div class="field full"><button class="primary" type="submit">⬆️ Character Upload</button></div>
+            <div class="field">
+              <label for="productCategory" data-i18n="categoryLabel">ক্যাটাগরি</label>
+              <select id="productCategory" name="category" required>
+                <option value="characters">Cartoon Characters</option>
+                <option value="backgrounds">Backgrounds</option>
+                <option value="props">Cartoon Props</option>
+                <option value="materials">Animation Materials</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="productName" data-i18n="productName">পণ্যের নাম</label>
+              <input id="productName" name="name" maxlength="100" required placeholder="যেমন: Village Background">
+            </div>
+            <div class="field">
+              <label for="productPrice" data-i18n="priceLabel">দাম (₹) — 0 = Free</label>
+              <input id="productPrice" name="price" type="number" min="0" step="0.01" value="0" required>
+            </div>
+            <div class="field">
+              <label for="productImage" data-i18n="imageLabel">প্রিভিউ ছবি (সর্বোচ্চ 700 KB)</label>
+              <input id="productImage" name="image" type="file" accept="image/*">
+              <div class="preview-box">
+                <img id="imagePreview" class="preview" alt="Image preview">
+                <span id="previewPlaceholder" class="muted" data-i18n="previewPlaceholder">ছবি বেছে নিলে এখানে প্রিভিউ দেখা যাবে।</span>
+              </div>
+              <small class="muted" data-i18n="imageRequiredNote">নতুন পণ্যে ছবি আবশ্যক। এডিট করার সময় আগের ছবি রাখা যায়।</small>
+            </div>
+            <div class="field full">
+              <label for="productDescription" data-i18n="descriptionLabel">বিবরণ</label>
+              <textarea id="productDescription" name="description" rows="3" maxlength="1000" placeholder="পণ্য সম্পর্কে লিখুন"></textarea>
+            </div>
+            <div class="field full">
+              <label for="digitalFile" data-i18n="digitalFileLabel">ডিজিটাল ডাউনলোড ফাইল (ঐচ্ছিক, সর্বোচ্চ 700 KB)</label>
+              <input id="digitalFile" name="digitalFile" type="file">
+              <span id="digitalFileStatus" class="muted" data-i18n="noDigitalFile">কোনো ফাইল যুক্ত করা হয়নি।</span>
+              <label><input type="checkbox" id="removeDigitalFile" style="width:auto"> <span data-i18n="removeDigitalFile">এডিট করার সময় আগের ডাউনলোড ফাইল সরাও</span></label>
+            </div>
+            <div class="field full">
+              <button class="primary" id="saveProductButton" type="submit" data-i18n="saveProduct">⬆️ Save Product</button>
+              <button class="secondary hidden" id="cancelEditButton" type="button" onclick="resetProductForm()" data-i18n="cancelEdit">Cancel Edit</button>
+            </div>
           </div>
         </form>
 
         <hr>
-        <h3>🏞️ ২. Cartoon Backgrounds আপলোড</h3>
-        <form class="uploadForm" data-category="backgrounds">
-          <div class="form-grid">
-            <div class="field full"><label>ব্যাকগ্রাউন্ডের ছবি</label><input type="file" name="image" accept="image/*" required><img class="preview" alt="ছবির প্রিভিউ"></div>
-            <div class="field"><label>ব্যাকগ্রাউন্ডের নাম</label><input name="name" placeholder="যেমন: Village Background" required></div>
-            <div class="field"><label>দাম (₹)</label><input name="price" type="number" min="0" value="0" required></div>
-            <div class="field full"><label>বিবরণ</label><textarea name="description" placeholder="ব্যাকগ্রাউন্ড সম্পর্কে লিখুন"></textarea></div>
-            <div class="field full"><button class="primary" type="submit">⬆️ Background Upload</button></div>
+        <h3 data-i18n="storeSettings">দোকানের সেটিংস</h3>
+        <div class="form-grid">
+          <div class="field full">
+            <label for="whatsappNumber" data-i18n="whatsappNumber">WhatsApp নম্বর (দেশের কোডসহ, যেমন 91XXXXXXXXXX)</label>
+            <input id="whatsappNumber" inputmode="tel" placeholder="91XXXXXXXXXX">
           </div>
-        </form>
-
-        <hr>
-        <h3>🪑 ৩. Cartoon Props আপলোড</h3>
-        <form class="uploadForm" data-category="props">
-          <div class="form-grid">
-            <div class="field full"><label>প্রপসের ছবি</label><input type="file" name="image" accept="image/*" required><img class="preview" alt="ছবির প্রিভিউ"></div>
-            <div class="field"><label>প্রপসের নাম</label><input name="name" placeholder="যেমন: Magic Sword" required></div>
-            <div class="field"><label>দাম (₹)</label><input name="price" type="number" min="0" value="0" required></div>
-            <div class="field full"><label>বিবরণ</label><textarea name="description" placeholder="প্রপস সম্পর্কে লিখুন"></textarea></div>
-            <div class="field full"><button class="primary" type="submit">⬆️ Props Upload</button></div>
+          <div class="field full">
+            <button class="secondary" onclick="saveSettings()" data-i18n="saveSettings">Save Settings</button>
           </div>
-        </form>
-
-        <hr>
-        <h3>🎬 ৪. Animation Materials আপলোড</h3>
-        <form class="uploadForm" data-category="materials">
-          <div class="form-grid">
-            <div class="field full"><label>অ্যানিমেশন সামগ্রীর ছবি</label><input type="file" name="image" accept="image/*" required><img class="preview" alt="ছবির প্রিভিউ"></div>
-            <div class="field"><label>সামগ্রীর নাম</label><input name="name" placeholder="যেমন: Mouth Shapes Pack" required></div>
-            <div class="field"><label>দাম (₹)</label><input name="price" type="number" min="0" value="0" required></div>
-            <div class="field full"><label>বিবরণ</label><textarea name="description" placeholder="সামগ্রী সম্পর্কে লিখুন"></textarea></div>
-            <div class="field full"><button class="primary" type="submit">⬆️ Materials Upload</button></div>
-          </div>
-        </form>
-
-        <hr>
-        <h3>🧰 দোকানের অন্যান্য ব্যবস্থা</h3>
-        <div class="actions">
-          <button class="secondary" onclick="exportBackup()">Backup Download</button>
-          <button class="secondary" onclick="document.getElementById('backupFile').click()">Backup Restore</button>
-          <button class="danger" onclick="clearProducts()">সব ছবি মুছুন</button>
         </div>
-        <input id="backupFile" class="hidden" type="file" accept="application/json">
-        <p class="muted">Backup ফাইল নিরাপদে রাখবে। ছবির ডেটা বড় হলে ব্রাউজারের স্টোরেজ সীমার কারণে সব ছবি সংরক্ষণ নাও হতে পারে।</p>
+
+        <hr>
+        <h3 data-i18n="backupTitle">💾 Backup / Restore</h3>
+        <p class="muted" data-i18n="backupHint">Backup-এ পণ্য, ছবি, ডাউনলোড ফাইল, কার্ট, সেটিংস ও অর্ডার থাকতে পারে। ব্যাকআপ ফাইল ব্যক্তিগতভাবে রাখবে।</p>
+        <div class="actions">
+          <button class="secondary" onclick="exportBackup()" data-i18n="backupDownload">Download Backup</button>
+          <button class="secondary" onclick="document.getElementById('backupFile').click()" data-i18n="backupRestore">Restore Backup</button>
+          <button class="danger" onclick="clearProducts()" data-i18n="deleteAll">Delete All Products</button>
+        </div>
+        <input id="backupFile" class="hidden" type="file" accept=".json,application/json">
+        <p class="muted" data-i18n="localWarning">সতর্কতা: ব্রাউজারের স্টোরেজ সীমিত। বড় ফাইল বা অনেক ছবি সংরক্ষণে সমস্যা হতে পারে।</p>
       </div>
     </div>
   </section>
@@ -181,341 +252,110 @@ footer{text-align:center;color:var(--muted);padding:30px 15px;background:#171a2a
 <footer>
   <b>ZOGGY KARTUN</b>
   <p>2D Cartoon Assets Store</p>
-  <p>এই ডেমোতে ছবি ও পণ্যের তথ্য এই ব্রাউজারেই সংরক্ষিত হয়।</p>
+  <p data-i18n="footerNote">লোকাল ডেমো — অনলাইন বিক্রির জন্য সার্ভার সংযোগ দরকার।</p>
 </footer>
-<div id="notice" role="status"></div>
+
+<div id="notice" role="status" aria-live="polite"></div>
 
 <script>
-const DB_KEY = "zoggy_kartun_products_v1";
-const categories = {
+"use strict";
+
+/* =====================================================
+   ZOGGY KARTUN - SINGLE FILE STORE
+   Local browser storage only; not a secure production backend.
+   ===================================================== */
+
+const DB_KEY = "zoggy_kartun_store_v3";
+const CATEGORIES = {
   characters: "Cartoon Characters",
-  backgrounds: "Cartoon Backgrounds",
+  backgrounds: "Backgrounds",
   props: "Cartoon Props",
   materials: "Animation Materials"
 };
+const MAX_FILE_SIZE = 700 * 1024;
 
-let currentCategory = "all";
-let adminUnlocked = false;
-let products = loadProducts();
-
-function loadProducts(){
-  try {
-    const data = JSON.parse(localStorage.getItem(DB_KEY) || "[]");
-    return Array.isArray(data) ? data : [];
-  } catch(e) { return []; }
-}
-
-function saveProducts(){
-  try {
-    localStorage.setItem(DB_KEY, JSON.stringify(products));
-    return true;
-  } catch(e) {
-    notify("স্টোরেজ পূর্ণ! কিছু ছবি মুছে ছোট ছবি দিয়ে আবার চেষ্টা করো।");
-    return false;
-  }
-}
-
-function notify(message){
-  const el = document.getElementById("notice");
-  el.textContent = message;
-  el.style.display = "block";
-  clearTimeout(window.noticeTimer);
-  window.noticeTimer = setTimeout(()=>el.style.display="none",3000);
-}
-
-function showCategory(category, button){
-  currentCategory = category;
-  document.querySelectorAll("#categoryNav button").forEach(b=>b.classList.remove("active"));
-  if(button) button.classList.add("active");
-  const title = category === "all" ? "সব ছবি" : categories[category];
-  document.getElementById("listTitle").textContent = title;
-  renderProducts();
-  window.scrollTo({top:0,behavior:"smooth"});
-}
-
-function renderProducts(){
-  const grid = document.getElementById("productGrid");
-  const search = document.getElementById("searchInput").value.trim().toLowerCase();
-  let list = products.filter(p =>
-    (currentCategory==="all" || p.category===currentCategory) &&
-    (p.name.toLowerCase().includes(search) ||
-     (p.description||"").toLowerCase().includes(search))
-  );
-
-  const sort = document.getElementById("sortSelect").value;
-  if(sort==="name") list.sort((a,b)=>a.name.localeCompare(b.name));
-  if(sort==="low") list.sort((a,b)=>a.price-b.price);
-  if(sort==="high") list.sort((a,b)=>b.price-a.price);
-  if(sort==="new") list.sort((a,b)=>b.created-a.created);
-
-  document.getElementById("totalCount").textContent = products.length;
-  grid.innerHTML = "";
-
-  if(!list.length){
-    grid.innerHTML = '<div class="empty"><h3>এখানে এখনো কোনো ছবি নেই</h3><p>Admin Panel খুলে এই ক্যাটাগরিতে নিজের ফোন থেকে ছবি আপলোড করো।</p></div>';
-    return;
-  }
-
-  list.forEach(p=>{
-    const card = document.createElement("article");
-    card.className = "card";
-
-    const img = document.createElement("img");
-    img.src = p.image;
-    img.alt = p.name;
-    img.loading = "lazy";
-    card.appendChild(img);
-
-    const body = document.createElement("div");
-    body.className = "card-body";
-
-    const title = document.createElement("h3");
-    title.textContent = p.name;
-    body.appendChild(title);
-
-    const category = document.createElement("div");
-    category.className = "muted";
-    category.textContent = categories[p.category] || p.category;
-    body.appendChild(category);
-
-    const price = document.createElement("div");
-    price.className = "price";
-    price.textContent = Number(p.price) === 0 ? "Free" : "₹" + p.price;
-    body.appendChild(price);
-
-    if(p.description){
-      const desc = document.createElement("p");
-      desc.className = "muted";
-      desc.textContent = p.description;
-      body.appendChild(desc);
-    }
-
-    const actions = document.createElement("div");
-    actions.className = "actions";
-    const order = document.createElement("button");
-    order.className = "primary";
-    order.textContent = "Order";
-    order.onclick = ()=>orderProduct(p.id);
-    actions.appendChild(order);
-
-    if(adminUnlocked){
-      const edit = document.createElement("button");
-      edit.className = "secondary";
-      edit.textContent = "Edit";
-      edit.onclick = ()=>editProduct(p.id);
-      actions.appendChild(edit);
-
-      const del = document.createElement("button");
-      del.className = "danger";
-      del.textContent = "Delete";
-      del.onclick = ()=>deleteProduct(p.id);
-      actions.appendChild(del);
-    }
-
-    body.appendChild(actions);
-    card.appendChild(body);
-    grid.appendChild(card);
-  });
-}
-
-function loginAdmin(){
-  if(document.getElementById("adminPassword").value === "zoggy123"){
-    adminUnlocked = true;
-    document.getElementById("uploadForms").classList.remove("hidden");
-    document.getElementById("adminPassword").value = "";
-    notify("Admin Panel খোলা হয়েছে।");
-    renderProducts();
-  } else {
-    notify("পাসওয়ার্ড সঠিক নয়।");
-  }
-}
-
-function goToAdmin(){
-  document.getElementById("adminPanel").scrollIntoView({behavior:"smooth"});
-}
-
-function toggleAdmin(){
-  const content = document.getElementById("adminContent");
-  content.classList.toggle("hidden");
-}
-
-document.querySelectorAll(".uploadForm").forEach(form=>{
-  const fileInput = form.elements.image;
-  const preview = form.querySelector(".preview");
-
-  fileInput.addEventListener("change",()=>{
-    const file = fileInput.files[0];
-    if(!file) {
-      preview.style.display="none";
-      return;
-    }
-    if(!file.type.startsWith("image/")){
-      notify("একটি ছবির ফাইল বেছে নাও।");
-      fileInput.value="";
-      return;
-    }
-    if(file.size > 700 * 1024){
-      notify("ছবিটি 700 KB-এর বেশি। ছোট ছবি বেছে নাও।");
-      fileInput.value="";
-      preview.style.display="none";
-      return;
-    }
-    preview.src = URL.createObjectURL(file);
-    preview.style.display="block";
-  });
-
-  form.addEventListener("submit",async event=>{
-    event.preventDefault();
-    if(!adminUnlocked){
-      notify("আগে Admin Unlock করো।");
-      return;
-    }
-    const file = fileInput.files[0];
-    if(!file){
-      notify("আগে একটি ছবি বেছে নাও।");
-      return;
-    }
-
-    const name = form.elements.name.value.trim();
-    const price = Number(form.elements.price.value);
-    const description = form.elements.description.value.trim();
-
-    if(!name || !Number.isFinite(price) || price<0){
-      notify("নাম ও সঠিক দাম লিখো।");
-      return;
-    }
-
-    try{
-      const image = await fileToDataURL(file);
-      const product = {
-        id: Date.now().toString() + Math.random().toString(16).slice(2),
-        category: form.dataset.category,
-        name, price, description, image,
-        created: Date.now()
-      };
-      products.unshift(product);
-
-      if(!saveProducts()){
-        products = products.filter(p=>p.id!==product.id);
-        return;
-      }
-
-      form.reset();
-      preview.removeAttribute("src");
-      preview.style.display="none";
-      notify("ছবি সফলভাবে আপলোড হয়েছে!");
-      showCategory(product.category,document.querySelector('[data-category="'+product.category+'"]'));
-    } catch(e){
-      notify("ছবি সংরক্ষণ করা যায়নি। স্টোরেজ পরীক্ষা করো।");
-    }
-  });
-});
-
-function fileToDataURL(file){
-  return new Promise((resolve,reject)=>{
-    const reader = new FileReader();
-    reader.onload = ()=>resolve(reader.result);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-function editProduct(id){
-  if(!adminUnlocked) return;
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  const name = prompt("পণ্যের নতুন নাম:",p.name);
-  if(name===null) return;
-  const price = prompt("নতুন দাম (₹):",p.price);
-  if(price===null) return;
-  const n = Number(price);
-  if(!name.trim() || !Number.isFinite(n) || n<0){
-    notify("নাম বা দাম সঠিক নয়।");
-    return;
-  }
-  const description = prompt("নতুন বিবরণ:",p.description||"");
-  if(description===null) return;
-  p.name=name.trim();
-  p.price=n;
-  p.description=description.trim();
-  if(saveProducts()){
-    notify("পণ্যের তথ্য পরিবর্তন হয়েছে।");
-    renderProducts();
-  }
-}
-
-function deleteProduct(id){
-  if(!adminUnlocked) return;
-  if(!confirm("এই ছবি ও পণ্যের তথ্য মুছে ফেলবে?")) return;
-  products=products.filter(p=>p.id!==id);
-  if(saveProducts()){
-    notify("ছবি মুছে ফেলা হয়েছে।");
-    renderProducts();
-  }
-}
-
-function orderProduct(id){
-  const p = products.find(x=>x.id===id);
-  if(!p) return;
-  const message = `আমি এই পণ্যটি সম্পর্কে জানতে চাই:\n${p.name}\nক্যাটাগরি: ${categories[p.category]}\nদাম: ${p.price===0?"Free":"₹"+p.price}`;
-  const phone = prompt("অর্ডারের জন্য WhatsApp নম্বর লিখুন (দেশের কোডসহ, যেমন 91XXXXXXXXXX):");
-  if(!phone) return;
-  const digits=phone.replace(/\D/g,"");
-  if(digits.length<10){
-    notify("সঠিক WhatsApp নম্বর লিখুন।");
-    return;
-  }
-  window.open("https://wa.me/"+digits+"?text="+encodeURIComponent(message),"_blank");
-}
-
-function exportBackup(){
-  if(!adminUnlocked) return notify("আগে Admin Unlock করো।");
-  const blob = new Blob([JSON.stringify(products)],{type:"application/json"});
-  const url = URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download="zoggy-kartun-backup.json";
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-document.getElementById("backupFile").addEventListener("change",async event=>{
-  if(!adminUnlocked) return notify("আগে Admin Unlock করো।");
-  const file=event.target.files[0];
-  if(!file) return;
-  try{
-    const imported=JSON.parse(await file.text());
-    if(!Array.isArray(imported) || !imported.every(p=>p && p.id && p.name && p.image && categories[p.category])){
-      throw new Error("Invalid backup");
-    }
-    if(!confirm("বর্তমান ছবিগুলোর সঙ্গে Backup-এর ছবিগুলো যোগ করবে?")) return;
-    const ids=new Set(products.map(p=>p.id));
-    const newItems=imported.filter(p=>!ids.has(p.id));
-    products=[...newItems,...products];
-    if(saveProducts()){
-      notify("Backup Restore সম্পন্ন।");
-      renderProducts();
-    }
-  }catch(e){
-    notify("Backup ফাইলটি সঠিক নয়।");
-  }finally{
-    event.target.value="";
-}
-});
-
-
-function clearP
- function clearProducts(){
-  if(!adminUnlocked) return notify("আগে Admin Unlock করো।");
-  if(!confirm("সব ছবি মুছে ফেলবে?")) return;
-  products = [];
-  if(saveProducts()){
-    notify("সব ছবি মুছে ফেলা হয়েছে।");
-    renderProducts();
-  }
-}
-
-renderProducts();
-</script>
-</body>
-</html> 
+const translations = {
+  bn: {
+    admin:"⚙️ Admin Panel",cart:"Cart",all:"🏠 সব ছবি",
+    characters:"🎭 Cartoon Characters",backgrounds:"🏞️ Backgrounds",
+    props:"🪑 Cartoon Props",materials:"🎬 Animation Materials",
+    welcome:"Welcome to ZOGGY KARTUN!",
+    heroText:"তোমার 2D কার্টুন অ্যানিমেশনের জন্য চরিত্র, ব্যাকগ্রাউন্ড, প্রপস ও অ্যানিমেশন অ্যাসেট এক জায়গায়।",
+    totalAssets:"মোট অ্যাসেট",categories:"ক্যাটাগরি",
+    storeHint:"ছবি দেখতে বা অর্ডার করতে একটি অ্যাসেট বেছে নাও।",
+    search:"🔍 ছবির নাম দিয়ে খুঁজুন...",newest:"নতুন আগে",
+    nameSort:"নাম অনুযায়ী",lowPrice:"কম দাম আগে",highPrice:"বেশি দাম আগে",
+    allPrices:"সব দাম",freeOnly:"শুধু Free",paidOnly:"শুধু Paid",
+    total:"মোট",refresh:"Refresh",clearCart:"কার্ট খালি করো",
+    checkout:"WhatsApp Checkout",
+    cartNote:"WhatsApp অর্ডার পাঠালে সেটি পেমেন্ট নিশ্চিত করে না। অর্ডার গ্রহণ ও পেমেন্ট আলাদাভাবে যাচাই করতে হবে।",
+    orderHistory:"অর্ডার হিস্ট্রি",
+    historyNote:"এই ডিভাইস থেকে তৈরি করা অর্ডারের রেকর্ড এখানে থাকবে।",
+    showHide:"দেখাও / লুকাও",
+    adminIntro:"নিজের অ্যাসেট আপলোড, পরিবর্তন, ডিলিট এবং দোকানের সেটিংস পরিচালনা করো।",
+    passwordLabel:"Admin Password",unlock:"Admin Unlock",
+    demoPassword:"ডেমো পাসওয়ার্ড: zoggy123। এটি নিরাপদ সার্ভার-ভিত্তিক লগইন নয়।",
+    logout:"Logout",productEditor:"➕ অ্যাসেট আপলোড / এডিট",
+    editorHint:"ছবি বেছে নাও। চাইলে আলাদা ডিজিটাল ফাইলও যুক্ত করতে পারো। আপলোডের আগে প্রিভিউ দেখা যাবে।",
+    categoryLabel:"ক্যাটাগরি",productName:"পণ্যের নাম",
+    priceLabel:"দাম (₹) — 0 = Free",imageLabel:"প্রিভিউ ছবি (সর্বোচ্চ 700 KB)",
+    previewPlaceholder:"ছবি বেছে নিলে এখানে প্রিভিউ দেখা যাবে।",
+    imageRequiredNote:"নতুন পণ্যে ছবি আবশ্যক। এডিট করার সময় আগের ছবি রাখা যায়।",
+    descriptionLabel:"বিবরণ",
+    digitalFileLabel:"ডিজিটাল ডাউনলোড ফাইল (ঐচ্ছিক, সর্বোচ্চ 700 KB)",
+    noDigitalFile:"কোনো ফাইল যুক্ত করা হয়নি।",
+    removeDigitalFile:"এডিট করার সময় আগের ডাউনলোড ফাইল সরাও",
+    saveProduct:"⬆️ Save Product",cancelEdit:"Cancel Edit",
+    storeSettings:"দোকানের সেটিংস",
+    whatsappNumber:"WhatsApp নম্বর (দেশের কোডসহ, যেমন 91XXXXXXXXXX)",
+    saveSettings:"Save Settings",backupTitle:"💾 Backup / Restore",
+    backupHint:"Backup-এ পণ্য, ছবি, ডাউনলোড ফাইল, কার্ট, সেটিংস ও অর্ডার থাকতে পারে। ব্যাকআপ ফাইল ব্যক্তিগতভাবে রাখবে।",
+    backupDownload:"Download Backup",backupRestore:"Restore Backup",
+    deleteAll:"Delete All Products",
+    localWarning:"সতর্কতা: ব্রাউজারের স্টোরেজ সীমিত। বড় ফাইল বা অনেক ছবি সংরক্ষণে সমস্যা হতে পারে।",
+    footerNote:"লোকাল ডেমো — অনলাইন বিক্রির জন্য সার্ভার সংযোগ দরকার।",
+    noAssets:"এখানে এখনো কোনো অ্যাসেট নেই। Admin Panel থেকে ছবি আপলোড করো।",
+    free:"Free",addCart:"Add to Cart",buyNow:"Buy Now",
+    download:"Download",edit:"Edit",delete:"Delete",noDigital:"ডাউনলোড ফাইল নেই",
+    added:"কার্টে যোগ হয়েছে।",emptyCart:"কার্ট খালি।",
+    remove:"Remove",quantity:"পরিমাণ",order:"অর্ডার",
+    emptyOrders:"এখনো কোনো অর্ডার রেকর্ড নেই।",
+    orderSent:"WhatsApp-এ অর্ডার পাঠানোর জন্য খোলা হচ্ছে।",
+    passwordWrong:"পাসওয়ার্ড সঠিক নয়।",
+    adminUnlocked:"Admin Panel খোলা হয়েছে।",
+    adminLoggedOut:"Admin লগআউট হয়েছে।",
+    chooseImage:"একটি ছবি বেছে নাও।",imageTooLarge:"ছবির সাইজ 700 KB-এর বেশি। ছোট ছবি বেছে নাও।",
+    fileTooLarge:"ফাইলের সাইজ 700 KB-এর বেশি। ছোট ফাইল বেছে নাও।",
+    productSaved:"পণ্য সংরক্ষিত হয়েছে।",
+    productUpdated:"পণ্য আপডেট হয়েছে।",
+    productDeleted:"পণ্য মুছে ফেলা হয়েছে।",
+    productNameRequired:"পণ্যের নাম লিখো।",
+    storageError:"ব্রাউজারের স্টোরেজ পূর্ণ হতে পারে। কম সাইজের ছবি ব্যবহার করো।",
+    backupDone:"Backup ডাউনলোড শুরু হয়েছে।",
+    backupBad:"Backup ফাইলটি সঠিক নয়।",
+    restoreDone:"Backup Restore সম্পন্ন হয়েছে।",
+    restoreConfirm:"Backup-এর তথ্য দিয়ে বর্তমান ডেটা পুরোপুরি প্রতিস্থাপন করবে?",
+    deleteConfirm:"সব পণ্য ও ছবি মুছে ফেলবে? এই কাজ ফিরিয়ে আনা যাবে না।",
+    deleteAllDone:"সব পণ্য মুছে ফেলা হয়েছে।",
+    settingsSaved:"সেটিংস সংরক্ষিত হয়েছে।",
+    needPhone:"আগে Admin Panel-এ WhatsApp নম্বর সেট করো।",
+    invalidPhone:"সঠিক WhatsApp নম্বর লিখো।",
+    orderCreated:"এই ডিভাইসে অর্ডারের রেকর্ড রাখা হয়েছে।",
+    digitalNotAvailable:"এই পণ্যে কোনো ডিজিটাল ফাইল যুক্ত নেই।",
+    notPaid:"Free অ্যাসেট ডাউনলোড করা যাবে। Paid অ্যাসেটের জন্য সার্ভার-ভিত্তিক পেমেন্ট ও ডেলিভারি দরকার।",
+    downloadFreeOnly:"এখানে শুধু Free অ্যাসেট সরাসরি ডাউনলোড করা যাবে।",
+    fileDownload:"অ্যাসেট ফাইল",
+    noDescription:"কোনো বিবরণ নেই।",
+    freeOrder:"Free অর্ডার",
+    orderNumber:"অর্ডার নম্বর",
+    date:"তারিখ",
+    status:"অবস্থা",
+    pending:"Pending — পেমেন্ট যাচাই করা হয়নি",
+    paid:"Paid",
+    cancelled:"Cancelled",
+    noProducts:"কোনো পণ্য নেই।",
+    clearCartConfirm:"কার্টের সব পণ্য সরিয়ে ফেলবে?",
+    fileAdded:"ডিজিটাল ফাইল যুক্ত করা হয়েছে।",
+    fileRemoved:"ডিজিটাল ফাইল সরানো হয়েছে।",
+    restoreWarning:"এই ফাইলটি বিশ্বস্ত ব্যাকআপ থেকে এসেছে কি না নিশ্চিত হও। Restore করলে বর্তমান ডেটা বদলে যেতে পারে।",
+    adminOnly
