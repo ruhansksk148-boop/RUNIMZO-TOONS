@@ -155,7 +155,7 @@ function orderNow(){
  let off=Math.round(sub*discountRate);
  let lines=items.map(i=>`${products[i].name} x ${cart[i]} = Rs ${products[i].price*cart[i]}`).join("\n");
  let msg=`Hello ZOGGGT CARTUN!\nNew order\nName: ${name}\nCustomer WhatsApp: ${phone}\nReason: ${reason}\n\nItems:\n${lines}\nSubtotal: Rs ${sub}\nCoupon: ${appliedCoupon||"None"}\nDiscount: Rs ${off}\nTOTAL: Rs ${sub-off}\n\nPlease send payment instructions and confirm my order.`;
- window.open("https://wa.me/9182828892202?text="+encodeURIComponent(msg),"_blank");
+ window.open("https://wa.me/918282892204?text="+encodeURIComponent(msg),"_blank");
 }
 function adminLogin(){
  if(document.getElementById("adminPassword").value==="ZOGGYADMIN2026"){
