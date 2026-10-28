@@ -198,5 +198,761 @@ function saveProduct(){
 }
 render();
 </script>
+<!-- ================= ZOGGGT CARTUN EVENT SECTION START ================= -->
+<style>
+#zg-event-section {
+  --zg-bg:#060b18;
+  --zg-panel:#0b1427;
+  --zg-border:#30415f;
+  --zg-yellow:#ffd400;
+  --zg-purple:#6425ff;
+  --zg-pink:#ec168a;
+  background:var(--zg-bg);
+  color:#f7f8ff;
+  padding:22px 14px;
+  margin-top:25px;
+  border-radius:18px;
+  font-family:Arial,sans-serif;
+  box-sizing:border-box;
+}
+#zg-event-section * { box-sizing:border-box; }
+#zg-event-section button,
+#zg-event-section input,
+#zg-event-section textarea,
+#zg-event-section select { font:inherit; }
+#zg-event-section button {
+  border:0;
+  border-radius:10px;
+  padding:11px 14px;
+  font-weight:bold;
+  cursor:pointer;
+  color:#fff;
+  background:linear-gradient(90deg,#6425ff,#a21caf);
+}
+#zg-event-section .zg-yellow {
+  background:var(--zg-yellow);
+  color:#111;
+}
+#zg-event-section .zg-wrap { max-width:1200px; margin:auto; }
+#zg-event-section .zg-hero-grid {
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:16px;
+}
+#zg-event-section .zg-hero,
+#zg-event-section .zg-panel,
+#zg-event-section .zg-card,
+#zg-event-section .zg-admin {
+  border:1px solid var(--zg-border);
+  border-radius:18px;
+  padding:20px;
+  background:linear-gradient(140deg,#122f87,#17112c);
+}
+#zg-event-section .zg-hero { min-height:260px; }
+#zg-event-section .zg-kicker {
+  display:inline-block;
+  background:var(--zg-yellow);
+  color:#111;
+  padding:8px;
+  border-radius:8px;
+  font-weight:900;
+}
+#zg-event-section .zg-title {
+  font-size:clamp(36px,6vw,68px);
+  line-height:.98;
+  margin:18px 0;
+  font-weight:900;
+}
+#zg-event-section .zg-title span { color:var(--zg-yellow); }
+#zg-event-section .zg-sale {
+  display:inline-block;
+  background:#f20b58;
+  padding:10px 18px;
+  border-radius:9px;
+  font-size:22px;
+  font-weight:900;
+}
+#zg-event-section .zg-panel { background:var(--zg-panel); }
+#zg-event-section .zg-timer {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:6px;
+}
+#zg-event-section .zg-time {
+  text-align:center;
+  border:1px solid #8b35ff;
+  border-radius:10px;
+  padding:9px 2px;
+}
+#zg-event-section .zg-time b {
+  display:block;
+  color:#ffb6e8;
+  font-size:23px;
+}
+#zg-event-section .zg-time small { font-size:11px; }
+#zg-event-section .zg-coupon {
+  border-top:1px solid var(--zg-border);
+  margin-top:17px;
+  padding-top:14px;
+}
+#zg-event-section .zg-code {
+  text-align:center;
+  border:1px dashed var(--zg-yellow);
+  color:var(--zg-yellow);
+  padding:12px;
+  font-size:22px;
+  font-weight:900;
+  margin:12px 0;
+  overflow-wrap:anywhere;
+}
+#zg-event-section .zg-coupon button { width:100%; }
+#zg-event-section .zg-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:28px 0 14px;
+}
+#zg-event-section .zg-head h2 {
+  font-size:29px;
+  margin:0;
+}
+#zg-event-section .zg-head p {
+  color:#c2cbe0;
+  margin:6px 0;
+}
+#zg-event-section .zg-cards {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:13px;
+}
+#zg-event-section .zg-card {
+  padding:10px;
+  background:#0b1427;
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+#zg-event-section .zg-art {
+  min-height:135px;
+  border-radius:12px;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  font-size:21px;
+  font-weight:900;
+  padding:12px;
+  overflow-wrap:anywhere;
+  background:linear-gradient(135deg,#164e9b,#e91e63);
+}
+#zg-event-section .zg-a2 {
+  background:linear-gradient(135deg,#166534,#e9a21b);
+}
+#zg-event-section .zg-a3 {
+  background:linear-gradient(135deg,#0369a1,#6d28d9);
+}
+#zg-event-section .zg-a4 {
+  background:linear-gradient(135deg,#86198f,#f97316);
+}
+#zg-event-section .zg-tag {
+  display:inline-block;
+  background:#ec168a;
+  border-radius:20px;
+  padding:7px 9px;
+  font-size:11px;
+  font-weight:900;
+  margin-top:9px;
+  align-self:flex-start;
+}
+#zg-event-section .zg-card h3 {
+  margin:12px 0 7px;
+  font-size:18px;
+}
+#zg-event-section .zg-card p {
+  color:#c2cbe0;
+  font-size:14px;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+#zg-event-section .zg-dates {
+  font-size:12px;
+  line-height:1.9;
+  margin-top:auto;
+}
+#zg-event-section .zg-card-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:12px;
+}
+#zg-event-section .zg-card-actions button {
+  flex:1;
+  padding:9px 7px;
+}
+#zg-event-section .zg-badge {
+  display:inline-block;
+  background:#ec168a;
+  padding:7px 9px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+#zg-event-section .zg-benefits {
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  padding:18px;
+  margin-top:20px;
+  background:#0c1931;
+  border-radius:15px;
+}
+#zg-event-section .zg-benefits small {
+  display:block;
+  color:#c2cbe0;
+  margin-top:5px;
+}
+#zg-event-section .zg-admin {
+  margin-top:22px;
+  background:#0b1427;
+}
+#zg-event-section .zg-admin summary {
+  cursor:pointer;
+  font-weight:bold;
+}
+#zg-event-section .zg-note {
+  color:#ffe08a;
+  font-size:13px;
+  line-height:1.6;
+}
+#zg-event-section .zg-form {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+  margin-top:13px;
+}
+#zg-event-section .zg-form input,
+#zg-event-section .zg-form textarea,
+#zg-event-section .zg-form select {
+  width:100%;
+  min-width:0;
+  padding:11px;
+  border:1px solid #34435e;
+  border-radius:8px;
+  background:#070d19;
+  color:white;
+}
+#zg-event-section .zg-form textarea,
+#zg-event-section .zg-form button,
+#zg-event-section .zg-form .zg-full {
+  grid-column:1/-1;
+}
+#zg-event-section .zg-form textarea { min-height:75px; }
+#zg-event-section .zg-admin-row {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  padding:12px 0;
+  border-bottom:1px solid var(--zg-border);
+}
+#zg-event-section .zg-admin-row span {
+  overflow-wrap:anywhere;
+  flex:1;
+}
+#zg-event-section .zg-footer {
+  text-align:center;
+  padding:20px 5px 5px;
+  color:#aab7d1;
+  font-size:13px;
+}
+@media(max-width:850px) {
+  #zg-event-section .zg-hero-grid { grid-template-columns:1fr; }
+  #zg-event-section .zg-cards { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #zg-event-section .zg-benefits { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:480px) {
+  #zg-event-section { padding:12px 8px; }
+  #zg-event-section .zg-hero,
+  #zg-event-section .zg-panel,
+  #zg-event-section .zg-admin { padding:13px; }
+  #zg-event-section .zg-cards { gap:8px; }
+  #zg-event-section .zg-card { padding:7px; }
+  #zg-event-section .zg-art { min-height:105px; font-size:17px; }
+  #zg-event-section .zg-card h3 { font-size:15px; }
+  #zg-event-section .zg-card p { font-size:12px; }
+  #zg-event-section .zg-card-actions button { font-size:11px; }
+  #zg-event-section .zg-head h2 { font-size:23px; }
+  #zg-event-section .zg-time b { font-size:18px; }
+  #zg-event-section .zg-form { grid-template-columns:1fr; }
+  #zg-event-section .zg-form > * { grid-column:1/-1; }
+}
+</style>
+
+<section id="zg-event-section">
+  <div class="zg-wrap">
+
+    <!-- EVENT BANNER -->
+    <div class="zg-hero-grid">
+      <section class="zg-hero">
+        <span class="zg-kicker">★ SPECIAL OFFER</span>
+        <h2 class="zg-title">BIG CARTOON<br><span>EVENT</span></h2>
+        <p>Get your favourite cartoon assets at special prices!</p>
+        <div class="zg-sale">UP TO 50% OFF</div>
+      </section>
+
+      <!-- COUNTDOWN AND COUPON -->
+      <aside class="zg-panel">
+        <h3>◷ OFFER ENDS IN</h3>
+        <div class="zg-timer">
+          <div class="zg-time"><b id="zg-days">00</b><small>Days</small></div>
+          <div class="zg-time"><b id="zg-hours">00</b><small>Hours</small></div>
+          <div class="zg-time"><b id="zg-minutes">00</b><small>Minutes</small></div>
+          <div class="zg-time"><b id="zg-seconds">00</b><small>Seconds</small></div>
+        </div>
+
+        <div class="zg-coupon">
+          <b>◆ USE COUPON CODE</b>
+          <div class="zg-code" id="zg-featured-code">ZOGGGT50</div>
+          <button type="button" class="zg-yellow" id="zg-copy-button">
+            ▣ Copy Code
+          </button>
+          <p style="text-align:center">
+            Check each event for its coupon and discount.
+          </p>
+        </div>
+      </aside>
+    </div>
+
+    <!-- EVENT CARDS -->
+    <section id="zg-events-list">
+      <div class="zg-head">
+        <div>
+          <h2>🔥 Ongoing Events</h2>
+          <p>Don't miss these special offers!</p>
+        </div>
+        <button type="button" id="zg-show-events">View All Events →</button>
+      </div>
+      <div class="zg-cards" id="zg-event-cards"></div>
+      <p id="zg-no-events" hidden>No events added yet.</p>
+    </section>
+
+    <!-- BENEFITS -->
+    <div class="zg-benefits">
+      <div>🚚 Fast Delivery<small>Quick order handling</small></div>
+      <div>🛡️ Easy Ordering<small>Simple shopping experience</small></div>
+      <div>🎧 Support<small>Contact us for help</small></div>
+      <div>✨ Create More<small>Imagine with ZOGGGT CARTUN</small></div>
+    </div>
+
+    <!-- ADMIN EVENT MANAGER -->
+    <details class="zg-admin">
+      <summary>🔐 Admin Event Manager</summary>
+      <p class="zg-note">
+        Demo storage: events are saved in this browser only.
+        This is not secure admin authentication. Do not enter a password
+        or secret key here. A shared database is needed for all visitors
+        to see the same event changes.
+      </p>
+
+      <form class="zg-form" id="zg-event-form">
+        <input type="hidden" id="zg-edit-id">
+
+        <input id="zg-event-name" maxlength="100"
+               placeholder="Event name" required>
+
+        <input id="zg-event-discount" maxlength="40"
+               placeholder="Discount e.g. 20% OFF" required>
+
+        <label>
+          <span style="display:block;margin-bottom:5px">Start date</span>
+          <input id="zg-event-start" type="date" required>
+        </label>
+
+        <label>
+          <span style="display:block;margin-bottom:5px">End date</span>
+          <input id="zg-event-end" type="date" required>
+        </label>
+
+        <input id="zg-event-code" maxlength="40"
+               placeholder="Coupon code">
+
+        <input id="zg-event-label" maxlength="40"
+               placeholder="Badge e.g. SPECIAL OFFER">
+
+        <textarea id="zg-event-desc" maxlength="500"
+                  placeholder="Event description"></textarea>
+
+        <select id="zg-event-theme">
+          <option value="zg-a1">Pink / Blue</option>
+          <option value="zg-a2">Green / Gold</option>
+          <option value="zg-a3">Blue / Purple</option>
+          <option value="zg-a4">Purple / Orange</option>
+        </select>
+
+        <button type="submit" id="zg-save-event">
+          ＋ Save Event
+        </button>
+
+        <button type="button" class="zg-yellow" id="zg-cancel-edit" hidden>
+          Cancel Edit
+        </button>
+      </form>
+
+      <h3>Manage Events</h3>
+      <div id="zg-admin-event-list"></div>
+    </details>
+
+    <div class="zg-footer">
+      © 2026 ZOGGGT CARTUN • Event & Offers
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  "use strict";
+
+  const root = document.getElementById("zg-event-section");
+  if (!root) return;
+
+  const STORAGE_KEY = "zgEventsDemo";
+  const FEATURED_END = "2026-11-15T23:59:59";
+
+  const defaultEvents = [
+    {
+      id: "zg-anime-1",
+      name: "Anime Character Pack",
+      discount: "20% OFF",
+      desc: "Get 20% OFF on anime character assets!",
+      start: "2026-10-20",
+      end: "2026-11-05",
+      code: "ANIME20",
+      label: "SPECIAL OFFER",
+      theme: "zg-a1"
+    },
+    {
+      id: "zg-animal-2",
+      name: "Animal Character Pack",
+      discount: "30% OFF",
+      desc: "Bring life to your story with colourful animal characters!",
+      start: "2026-10-22",
+      end: "2026-11-08",
+      code: "ANIMAL30",
+      label: "SPECIAL OFFER",
+      theme: "zg-a2"
+    },
+    {
+      id: "zg-background-3",
+      name: "Background Bundle",
+      discount: "BUY 1 GET 1",
+      desc: "A special offer on selected background bundles.",
+      start: "2026-10-24",
+      end: "2026-11-12",
+      code: "BOGO",
+      label: "COUPON EVENT",
+      theme: "zg-a3"
+    },
+    {
+      id: "zg-props-4",
+      name: "Cartoon Props & Accessories",
+      discount: "50% OFF",
+      desc: "Save on selected props and accessories!",
+      start: "2026-10-25",
+      end: "2026-11-15",
+      code: "ZOGGGT50",
+      label: "LIMITED TIME",
+      theme: "zg-a4"
+    }
+  ];
+
+  let events = loadEvents();
+
+  function loadEvents() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved !== null) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (error) {
+      console.warn("Could not load demo event data:", error);
+    }
+    return defaultEvents.map(event => ({ ...event }));
+  }
+
+  function persistEvents() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(events));
+      return true;
+    } catch (error) {
+      alert("Could not save events in this browser. Check browser storage.");
+      return false;
+    }
+  }
+
+  function escapeHTML(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, function (ch) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      }[ch];
+    });
+  }
+
+  function formatDate(value) {
+    if (!value) return "Not set";
+    const date = new Date(value + "T12:00:00");
+    if (Number.isNaN(date.getTime())) return "Not set";
+    return date.toLocaleDateString("en-GB", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric"
+    });
+  }
+
+  function isValidDate(value) {
+    return /^\d{4}-\d{2}-\d{2}$/.test(value || "") &&
+      !Number.isNaN(new Date(value + "T12:00:00").getTime());
+  }
+
+  function isEventActive(event) {
+    const today = new Date();
+    const day = today.getFullYear() + "-" +
+      String(today.getMonth() + 1).padStart(2, "0") + "-" +
+      String(today.getDate()).padStart(2, "0");
+
+    return (!event.start || day >= event.start) &&
+      (!event.end || day <= event.end);
+  }
+
+  function renderEvents() {
+    const cards = root.querySelector("#zg-event-cards");
+    const adminList = root.querySelector("#zg-admin-event-list");
+    const noEvents = root.querySelector("#zg-no-events");
+
+    cards.innerHTML = events.map(function (event) {
+      const theme = ["zg-a1", "zg-a2", "zg-a3", "zg-a4"].includes(event.theme)
+        ? event.theme : "zg-a1";
+
+      const active = isEventActive(event);
+      const code = String(event.code || "").replace(/'/g, "\\'");
+
+      return `
+        <article class="zg-card">
+          <div class="zg-art ${theme}">
+            ${escapeHTML(event.discount)}<br>
+            ${escapeHTML(event.name)}
+          </div>
+          <span class="zg-tag">${escapeHTML(event.label || "SPECIAL OFFER")}</span>
+          <h3>${escapeHTML(event.name)}</h3>
+          <p>${escapeHTML(event.desc || "")}</p>
+          <div class="zg-dates">
+            ▦ Start: <b>${formatDate(event.start)}</b><br>
+            ◴ End: <b>${formatDate(event.end)}</b><br>
+            <span class="zg-badge">${active ? "ACTIVE / DATE CHECK" : "NOT CURRENTLY ACTIVE"}</span>
+          </div>
+          <div class="zg-card-actions">
+            <button type="button" data-zg-action="coupon"
+                    data-zg-id="${escapeHTML(event.id)}">Show Coupon</button>
+          </div>
+        </article>`;
+    }).join("");
+
+    noEvents.hidden = events.length !== 0;
+
+    adminList.innerHTML = events.map(function (event) {
+      return `
+        <div class="zg-admin-row">
+          <span>
+            <b>${escapeHTML(event.name)}</b><br>
+            ${escapeHTML(event.discount)} · ${escapeHTML(event.code || "No coupon")}
+          </span>
+          <button type="button" data-zg-action="edit"
+                  data-zg-id="${escapeHTML(event.id)}">Edit</button>
+          <button type="button" data-zg-action="delete"
+                  data-zg-id="${escapeHTML(event.id)}">Delete</button>
+        </div>`;
+    }).join("");
+  }
+
+  function showCoupon(id) {
+    const event = events.find(item => String(item.id) === String(id));
+    if (!event) return;
+
+    root.querySelector("#zg-featured-code").textContent =
+      event.code || "NO CODE";
+
+    root.querySelector(".zg-coupon").scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  }
+
+  async function copyCoupon() {
+    const code = root.querySelector("#zg-featured-code").textContent.trim();
+    if (!code || code === "NO CODE") {
+      alert("No coupon code available.");
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(code);
+      alert("Coupon copied: " + code);
+    } catch (error) {
+      alert("Your coupon code is: " + code);
+    }
+  }
+
+  function clearForm() {
+    root.querySelector("#zg-event-form").reset();
+    root.querySelector("#zg-edit-id").value = "";
+    root.querySelector("#zg-save-event").textContent = "＋ Save Event";
+    root.querySelector("#zg-cancel-edit").hidden = true;
+  }
+
+  function editEvent(id) {
+    const event = events.find(item => String(item.id) === String(id));
+    if (!event) return;
+
+    root.querySelector("#zg-edit-id").value = event.id;
+    root.querySelector("#zg-event-name").value = event.name || "";
+    root.querySelector("#zg-event-discount").value = event.discount || "";
+    root.querySelector("#zg-event-start").value = event.start || "";
+    root.querySelector("#zg-event-end").value = event.end || "";
+    root.querySelector("#zg-event-code").value = event.code || "";
+    root.querySelector("#zg-event-label").value = event.label || "";
+    root.querySelector("#zg-event-desc").value = event.desc || "";
+    root.querySelector("#zg-event-theme").value = event.theme || "zg-a1";
+
+    root.querySelector("#zg-save-event").textContent = "Save Changes";
+    root.querySelector("#zg-cancel-edit").hidden = false;
+
+    root.querySelector(".zg-admin").open = true;
+    root.querySelector("#zg-event-form").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }
+
+  function deleteEvent(id) {
+    const event = events.find(item => String(item.id) === String(id));
+    if (!event) return;
+
+    if (!confirm('Delete event "' + event.name + '"?')) return;
+
+    const oldEvents = events;
+    events = events.filter(item => String(item.id) !== String(id));
+
+    if (!persistEvents()) {
+      events = oldEvents;
+      return;
+    }
+
+    renderEvents();
+    clearForm();
+  }
+
+  root.querySelector("#zg-event-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const editId = root.querySelector("#zg-edit-id").value;
+    const name = root.querySelector("#zg-event-name").value.trim();
+    const discount = root.querySelector("#zg-event-discount").value.trim();
+    const start = root.querySelector("#zg-event-start").value;
+    const end = root.querySelector("#zg-event-end").value;
+
+    if (!name || !discount || !isValidDate(start) || !isValidDate(end)) {
+      alert("Enter the event name, discount and valid start/end dates.");
+      return;
+    }
+
+    if (end < start) {
+      alert("End date must be on or after the start date.");
+      return;
+    }
+
+    const eventData = {
+      id: editId || ("zg-event-" + Date.now()),
+      name: name,
+      discount: discount,
+      start: start,
+      end: end,
+      code: root.querySelector("#zg-event-code").value.trim().toUpperCase(),
+      label: root.querySelector("#zg-event-label").value.trim() || "SPECIAL OFFER",
+      desc: root.querySelector("#zg-event-desc").value.trim(),
+      theme: root.querySelector("#zg-event-theme").value
+    };
+
+    const oldEvents = events;
+
+    if (editId) {
+      events = events.map(item =>
+        String(item.id) === String(editId) ? eventData : item
+      );
+    } else {
+      events = [eventData, ...events];
+    }
+
+    if (!persistEvents()) {
+      events = oldEvents;
+      return;
+    }
+
+    renderEvents();
+    clearForm();
+    alert("Event saved in this browser.");
+  });
+
+  root.querySelector("#zg-event-cards").addEventListener("click", function (e) {
+    const button = e.target.closest("button[data-zg-action]");
+    if (!button) return;
+    if (button.dataset.zgAction === "coupon") showCoupon(button.dataset.zgId);
+  });
+
+  root.querySelector("#zg-admin-event-list").addEventListener("click", function (e) {
+    const button = e.target.closest("button[data-zg-action]");
+    if (!button) return;
+
+    const id = button.dataset.zgId;
+
+    if (button.dataset.zgAction === "edit") editEvent(id);
+    if (button.dataset.zgAction === "delete") deleteEvent(id);
+  });
+
+  root.querySelector("#zg-copy-button").addEventListener("click", copyCoupon);
+
+  root.querySelector("#zg-cancel-edit").addEventListener("click", clearForm);
+
+  root.querySelector("#zg-show-events").addEventListener("click", function () {
+    root.querySelector("#zg-events-list").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
+
+  function updateCountdown() {
+    const target = new Date(FEATURED_END).getTime();
+    const remaining = Math.max(0, Math.floor((target - Date.now()) / 1000));
+
+    root.querySelector("#zg-days").textContent =
+      String(Math.floor(remaining / 86400)).padStart(2, "0");
+    root.querySelector("#zg-hours").textContent =
+      String(Math.floor((remaining % 86400) / 3600)).padStart(2, "0");
+    root.querySelector("#zg-minutes").textContent =
+      String(Math.floor((remaining % 3600) / 60)).padStart(2, "0");
+    root.querySelector("#zg-seconds").textContent =
+      String(remaining % 60).padStart(2, "0");
+  }
+
+  renderEvents();
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+})();
+</script>
 </body>
 </html>
