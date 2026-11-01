@@ -50,6 +50,26 @@ footer{text-align:center;padding:25px;color:#aaa}
        alt="Advanced Animation Course"
        style="width:100%;border-radius:12px;">
 </section>
+ 
+<section class="panel" id="courseAccess">
+  <h2>🔐 Course Password Access</h2>
+
+  <h3>Human Cartoon Course</h3>
+  <input id="humanPassword" type="password" placeholder="Enter Human Course Password">
+  <button onclick="unlockCourse('human')">Unlock Human Course</button>
+  <p id="humanResult"></p>
+
+  <h3>Animal Cartoon Course</h3>
+  <input id="animalPassword" type="password" placeholder="Enter Animal Course Password">
+  <button onclick="unlockCourse('animal')">Unlock Animal Course</button>
+  <p id="animalResult"></p>
+
+  <h3>Combo Course</h3>
+  <input id="comboPassword" type="password" placeholder="Enter Combo Course Password">
+  <button onclick="unlockCourse('combo')">Unlock Combo Course</button>
+  <p id="comboResult"></p>
+</section>
+ 
 <div id="shop"></div>
 <div id="cart" class="panel">
 <h2>🛒 Your Cart</h2>
@@ -194,9 +214,51 @@ function saveProduct(){
  if(!name||!Number.isFinite(price)||price<0){alert("Enter a name and valid price.");return;}
  products[n-1]={...products[n-1],name,price,image};
  localStorage.setItem("zgProducts",JSON.stringify(products));
- render();alert("Saved in this browser.");
+render();alert("Saved in this browser.");
 }
-render();
+
+async function unlockCourse(course) {
+  const passwordInput = document.getElementById(course + "Password");
+  const result = document.getElementById(course + "Result");
+  const password = passwordInput.value;
+
+  if (!password) {
+    result.textContent = "Please enter your password.";
+    return;
+  }
+
+  result.textContent = "Checking password...";
+
+  try {
+    const response = await fetch(
+      "https://tvikzcxyiinoqbbwdvlc.supabase.co/functions/v1/course-access",
+      {
+        method: "POST",
+        headers: {
+  "Content-Type": "application/json",
+  "apikey": "sb_publishable_S9DHs76NQARet0nfDOyBHg_XMwOmk64",
+         
+  "Authorization": "Bearer sb_publishable_S9DHs76NQARet0nfDOyBHg_XMwOmk64"
+},
+        body: JSON.stringify({ course, password })
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      result.textContent = data.error || "Password incorrect.";
+      return;
+    }
+
+    result.textContent = "Password accepted! Total uses: " + data.count;
+  } catch (error) {
+    result.textContent = "Connection error. Please try again.";
+  }
+}
+
+ render();
+
 </script>
  
 </body>
