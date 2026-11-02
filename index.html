@@ -290,6 +290,7 @@ function showCoursePage(course) {
 
   if (page) {
     page.style.display = "block";
+  page.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
  render();
