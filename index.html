@@ -71,9 +71,26 @@ footer{text-align:center;padding:25px;color:#aaa}
 </section>
  
 <div id="shop"></div>
+<section id="humanCoursePage" class="panel course-page" style="display:none">
+  <h2>Human Cartoon Course</h2>
+  <div id="humanVideos"></div>
+</section>
+
+<section id="animalCoursePage" class="panel course-page" style="display:none">
+  <h2>Animal Cartoon Course</h2>
+  <div id="animalVideos"></div>
+</section>
+
+<section id="comboCoursePage" class="panel course-page" style="display:none">
+  <h2>Combo Cartoon Course</h2>
+  <div id="comboVideos"></div>
+</section> 
 <div id="cart" class="panel">
+ 
 <h2>🛒 Your Cart</h2>
+ 
 <div id="cartItems">Your cart is empty.</div>
+ 
 <p>Coupon code:</p>
 <input id="coupon" placeholder="Enter coupon code">
 <button onclick="applyCoupon()">Apply Coupon</button>
@@ -247,16 +264,34 @@ async function unlockCourse(course) {
     const data = await response.json();
 
     if (!response.ok || !data.success) {
-      result.textContent = data.error || "Password incorrect.";
-      return;
-    }
-
-    result.textContent = "Password accepted! Total uses: " + data.count;
-  } catch (error) {
-    result.textContent = "Connection error. Please try again.";
-  }
+  result.textContent = data.error || "Password incorrect.";
+  return;
 }
 
+result.textContent = "Password accepted! Total uses: " + data.count;
+showCoursePage(course);
+
+} catch (error) {
+  result.textContent = "Connection error. Please try again.";
+}
+}
+function showCoursePage(course) {
+  const pageIds = {
+    human: "humanCoursePage",
+    animal: "animalCoursePage",
+    combo: "comboCoursePage"
+  };
+
+  document.querySelectorAll(".course-page").forEach(page => {
+    page.style.display = "none";
+  });
+
+  const page = document.getElementById(pageIds[course]);
+
+  if (page) {
+    page.style.display = "block";
+  }
+}
  render();
 
 </script>
