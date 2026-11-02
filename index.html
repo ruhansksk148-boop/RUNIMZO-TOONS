@@ -293,9 +293,26 @@ function showCoursePage(course) {
   page.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 }
+ function createVideoSlots(containerId, total) {
+  const container = document.getElementById(containerId);
+
+  for (let i = 1; i <= total; i++) {
+    const slot = document.createElement("div");
+    slot.className = "card";
+    slot.innerHTML = `
+      <h3>🎬 Video ${i}</h3>
+      <p>Video will be added later.</p>
+    `;
+    container.appendChild(slot);
+  }
+}
+
+createVideoSlots("humanVideos", 30);
+createVideoSlots("animalVideos", 30);
+createVideoSlots("comboVideos", 60);
  render();
 
 </script>
- 
+ z
 </body>
 </html>
