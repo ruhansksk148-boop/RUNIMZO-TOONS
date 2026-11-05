@@ -312,6 +312,104 @@ createVideoSlots("animalVideos", 30);
 createVideoSlots("comboVideos", 60);
  render();
 
+// ===== ZOGGGT AI CHAT BOX =====
+
+const aiChat = document.createElement("div");
+
+aiChat.id = "zoggGtAiChat";
+
+aiChat.innerHTML = `
+  <div class="ai-chat-header">
+    🤖 ZOGGGT AI 2.0
+    <p>Cartoon Course Assistant</p>
+  </div>
+
+  <div id="aiMessages">
+    <p>নমস্কার! আমি ZOGGGT AI। তোমার প্রশ্ন করো।</p>
+  </div>
+
+  <div class="ai-chat-input">
+    <input
+      id="aiQuestion"
+      type="text"
+      placeholder="তোমার প্রশ্ন লেখো..."
+    >
+    <button onclick="sendZoggGtQuestion()">Send</button>
+  </div>
+`;
+
+document.body.appendChild(aiChat);
+
+const aiStyle = document.createElement("style");
+
+aiStyle.textContent = `
+#zoggGtAiChat {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 15px;
+  background: #ffffff;
+  border: 2px solid #333;
+  border-radius: 15px;
+  color: #222;
+}
+.ai-chat-header {
+  background: #202b50;
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+.ai-chat-header p {
+  margin-bottom: 0;
+  font-weight: normal;
+}
+#aiMessages {
+  min-height: 150px;
+  padding: 12px;
+  background: #f1f1f1;
+  margin: 12px 0;
+  border-radius: 10px;
+}
+.ai-chat-input {
+  display: flex;
+  gap: 8px;
+}
+.ai-chat-input input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px;
+}
+.ai-chat-input button {
+  padding: 12px;
+  background: #202b50;
+  color: white;
+  border: none;
+  border-radius: 7px;
+}
+`;
+
+document.head.appendChild(aiStyle);
+
+function sendZoggGtQuestion() {
+  const input = document.getElementById("aiQuestion");
+  const messages = document.getElementById("aiMessages");
+
+  if (!input.value.trim()) return;
+
+  const question = document.createElement("p");
+  question.textContent = "তুমি: " + input.value;
+
+  messages.appendChild(question);
+
+  const reply = document.createElement("p");
+  reply.textContent =
+    "ZOGGGT AI: Backend API এখনো সংযুক্ত করা হয়নি।";
+
+  messages.appendChild(reply);
+
+  input.value = "";
+}
+ 
 </script>
 </body>
 </html>
