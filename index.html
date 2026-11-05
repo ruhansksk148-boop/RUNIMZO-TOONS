@@ -391,23 +391,49 @@ aiStyle.textContent = `
 document.head.appendChild(aiStyle);
 
 function sendZoggGtQuestion() {
+async function sendZoggGtQuestion() {
   const input = document.getElementById("aiQuestion");
   const messages = document.getElementById("aiMessages");
 
-  if (!input.value.trim()) return;
+  const questionText = input.value.trim();
+  if (!questionText) return;
 
   const question = document.createElement("p");
-  question.textContent = "তুমি: " + input.value;
-
+  question.textContent = "তুমি: " + questionText;
   messages.appendChild(question);
 
   const reply = document.createElement("p");
-  reply.textContent =
-    "ZOGGGT AI: Backend API এখনো সংযুক্ত করা হয়নি।";
-
+  reply.textContent = "ZOGGGT AI: উত্তর খুঁজছি...";
   messages.appendChild(reply);
 
   input.value = "";
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        question: questionText,
+        course: "combo"
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "API Error");
+    }
+
+    reply.textContent =
+      "ZOGGGT AI: " +
+      (data.answer || "উত্তর পাওয়া যায়নি।");
+
+  } catch (error) {
+    reply.textContent =
+      "ZOGGGT AI: সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করো।";
+  }
 }
  
 </script>
