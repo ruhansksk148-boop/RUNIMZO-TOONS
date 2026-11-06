@@ -429,9 +429,11 @@ async function sendZoggGtQuestion() {
       "ZOGGGT AI: " +
       (data.answer || "উত্তর পাওয়া যায়নি।");
 
-  } catch (error) {
+    } catch (error) {
+    console.error("ZOGGGT AI ERROR:", error);
+
     reply.textContent =
-      "ZOGGGT AI: সংযোগে সমস্যা হয়েছে। আবার চেষ্টা করো।";
+      "ZOGGGT AI ERROR: " + error.message;
   }
 }
  
