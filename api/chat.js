@@ -1,4 +1,7 @@
 
+import fs from "node:fs";
+import path from "node:path";
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({
@@ -9,7 +12,7 @@ export default async function handler(req, res) {
   try {
     const { question, course = "combo" } = req.body || {};
 
-    if (!question || !question.trim()) {
+    if (typeof question !== "string" || !question.trim()) {
       return res.status(400).json({
         error: "Please enter a question."
       });
@@ -21,51 +24,96 @@ export default async function handler(req, res) {
       });
     }
 
-    const fs = await import("fs");
-    const path = await import("path");
+    // Find the ZOGGGT AI database
+    const root = process.cwd();
+    const possibleFolders = [
+      root,
+      path.join(root, "api")
+    ];
 
-    const files = fs.readdirSync(process.cwd());
+    let databasePath = null;
 
-    const dataFile = files.find(
-      name =>
+    for (const folder of possibleFolders) {
+      if (!fs.existsSync(folder)) continue;
+
+      const files = fs.readdirSync(folder);
+
+      const match = files.find(name =>
         name.startsWith("ZOGGGT_AI_WEBSITE_DATA") &&
         name.endsWith(".json")
-    );
+      );
 
-    if (!dataFile) {
+      if (match) {
+        databasePath = path.join(folder, match);
+        break;
+      }
+    }
+
+    if (!databasePath) {
       return res.status(500).json({
         error: "ZOGGGT AI lesson database not found."
       });
     }
 
     const data = JSON.parse(
-      fs.readFileSync(
-        path.join(process.cwd(), dataFile),
-        "utf8"
-      )
+      fs.readFileSync(databasePath, "utf8")
     );
 
-    const lessons = data.courses[course] || [];
+    const lessons = data?.courses?.[course];
 
-    const words = question
-      .toLowerCase()
-      .replace(/[?।,!.]/g, " ")
-      .split(/\s+/)
+    if (!Array.isArray(lessons)) {
+      return res.status(500).json({
+        error: "Course database is missing or invalid."
+      });
+    }
+
+    // Normalize Bengali and English questions
+    function normalize(value) {
+      return String(value)
+        .toLowerCase()
+        .normalize("NFKC")
+        .replace(/[?।,!.:;'"()[\]{}]/g, " ")
+        .replace(/\b(ki|kee|what|is|the|kya|hai)\b/g, " ")
+        .replace(/কী|কি|হলো|হয়|হয়|মানে/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    const questionText = normalize(question);
+    const questionWords = questionText
+      .split(" ")
       .filter(word => word.length > 1);
 
     let bestLesson = null;
     let bestScore = 0;
 
     for (const lesson of lessons) {
-      const topic = lesson.topic.toLowerCase();
+      if (!lesson || typeof lesson.topic !== "string") {
+        continue;
+      }
+
+      const topicText = normalize(lesson.topic);
+      const topicWords = topicText
+        .split(" ")
+        .filter(word => word.length > 1);
+
       let score = 0;
 
-      if (question.toLowerCase().includes(topic)) {
+      if (questionText === topicText) {
+        score += 20;
+      }
+
+      if (
+        topicText &&
+        questionText.includes(topicText)
+      ) {
         score += 10;
       }
 
-      for (const word of words) {
-        if (topic.includes(word)) score += 2;
+      for (const word of questionWords) {
+        if (topicWords.includes(word)) {
+          score += 3;
+        }
       }
 
       if (score > bestScore) {
@@ -74,75 +122,38 @@ export default async function handler(req, res) {
       }
     }
 
-    if (!bestLesson || bestScore < 4) {
+    if (!bestLesson || bestScore < 3) {
       return res.status(200).json({
         ai: "ZOGGGT AI 2.0",
-        answer: "দুঃখিত! এই প্রশ্নের উত্তর আমার সংরক্ষিত Course Database-এ পাওয়া যায়নি।",
+        course,
+        answer:
+          "দুঃখিত! এই প্রশ্নের উত্তর আমার সংরক্ষিত Course Database-এ পাওয়া যায়নি।",
         found: false
       });
     }
 
-    const apiKey = process.env.GEMINI_API_KEY;
+    const steps = Array.isArray(bestLesson.teaching_steps)
+      ? bestLesson.teaching_steps
+      : Array.isArray(bestLesson["Teaching Steps"])
+        ? bestLesson["Teaching Steps"]
+        : [];
 
-    if (!apiKey) {
-      return res.status(500).json({
-        error: "Gemini API key is not configured."
-      });
-    }
+    const practice =
+      bestLesson.practice_task ||
+      bestLesson["Practice Task"] ||
+      "";
 
-    const model =
-      process.env.GEMINI_MODEL || "gemini-2.5-flash";
+    let answer = bestLesson.answer || "এই বিষয়ে পাঠের তথ্য পাওয়া গেছে।";
 
-    const prompt = `
-You are ZOGGGT AI 2.0, a cartoon drawing teacher.
-
-Answer the student's question using ONLY the lesson information below.
-Do not invent facts or unrelated lessons.
-Explain simply and clearly.
-Use the student's question language when possible.
-
-LESSON:
-${JSON.stringify(bestLesson)}
-
-STUDENT QUESTION:
-${question}
-`;
-
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: prompt }]
-            }
-          ]
-        })
-      }
-    );
-
-    const result = await response.json();
-
-    if (!response.ok) {
-      return res.status(502).json({
-        error: "Gemini service error.",
-        details: result.error?.message || "Request failed"
-      });
-    }
-
-    const answer =
-      result.candidates?.[0]?.content?.parts
-        ?.map(part => part.text || "")
+    if (steps.length > 0) {
+      answer += "\n\nশেখার ধাপ:\n";
+      answer += steps
+        .map((step, index) => `${index + 1}. ${step}`)
         .join("\n");
+    }
 
-    if (!answer) {
-      return res.status(502).json({
-        error: "AI did not return an answer."
-      });
+    if (practice) {
+      answer += "\n\nPractice Task:\n" + practice;
     }
 
     return res.status(200).json({
@@ -150,14 +161,17 @@ ${question}
       course,
       topic: bestLesson.topic,
       answer,
+      teaching_steps: steps,
+      practice_task: practice,
       found: true
     });
 
   } catch (error) {
+    console.error("ZOGGGT AI ERROR:", error);
+
     return res.status(500).json({
       error: "Backend error.",
       details: error.message
     });
   }
-        }
-                                
+}
