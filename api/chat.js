@@ -3,6 +3,25 @@ import fs from "node:fs";
 import path from "node:path";
 
 export default async function handler(req, res) {
+  const allowedOrigins = [
+    "https://ruhansksk148-boop.github.io",
+    "https://runimzo-toons.vercel.app"
+  ];
+
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader("Vary", "Origin");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({
       error: "Only POST requests are allowed"
