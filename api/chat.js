@@ -24,32 +24,13 @@ export default async function handler(req, res) {
       });
     }
 
-    // Find the ZOGGGT AI database
-    const root = process.cwd();
-    const possibleFolders = [
-      root,
-      path.join(root, "api")
-    ];
+    const databasePath = path.join(
+      process.cwd(),
+      "private",
+      "ZOGGGT_AI_WEBSITE_DATA.json"
+    );
 
-    let databasePath = null;
-
-    for (const folder of possibleFolders) {
-      if (!fs.existsSync(folder)) continue;
-
-      const files = fs.readdirSync(folder);
-
-      const match = files.find(name =>
-        name.startsWith("ZOGGGT_AI_WEBSITE_DATA") &&
-        name.endsWith(".json")
-      );
-
-      if (match) {
-        databasePath = path.join(folder, match);
-        break;
-      }
-    }
-
-    if (!databasePath) {
+    if (!fs.existsSync(databasePath)) {
       return res.status(500).json({
         error: "ZOGGGT AI lesson database not found."
       });
@@ -67,7 +48,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // Normalize Bengali and English questions
     function normalize(value) {
       return String(value)
         .toLowerCase()
@@ -88,9 +68,7 @@ export default async function handler(req, res) {
     let bestScore = 0;
 
     for (const lesson of lessons) {
-      if (!lesson || typeof lesson.topic !== "string") {
-        continue;
-      }
+      if (!lesson || typeof lesson.topic !== "string") continue;
 
       const topicText = normalize(lesson.topic);
       const topicWords = topicText
@@ -99,21 +77,14 @@ export default async function handler(req, res) {
 
       let score = 0;
 
-      if (questionText === topicText) {
-        score += 20;
-      }
+      if (questionText === topicText) score += 20;
 
-      if (
-        topicText &&
-        questionText.includes(topicText)
-      ) {
+      if (topicText && questionText.includes(topicText)) {
         score += 10;
       }
 
       for (const word of questionWords) {
-        if (topicWords.includes(word)) {
-          score += 3;
-        }
+        if (topicWords.includes(word)) score += 3;
       }
 
       if (score > bestScore) {
@@ -134,15 +105,9 @@ export default async function handler(req, res) {
 
     const steps = Array.isArray(bestLesson.teaching_steps)
       ? bestLesson.teaching_steps
-      : Array.isArray(bestLesson["Teaching Steps"])
-        ? bestLesson["Teaching Steps"]
-        : [];
+      : [];
 
-    const practice =
-      bestLesson.practice_task ||
-      bestLesson["Practice Task"] ||
-      "";
-
+    const practice = bestLesson.practice_task || "";
     let answer = bestLesson.answer || "এই বিষয়ে পাঠের তথ্য পাওয়া গেছে।";
 
     if (steps.length > 0) {
