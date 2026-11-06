@@ -408,7 +408,7 @@ async function sendZoggGtQuestion() {
   input.value = "";
 
   try {
-    const response = await fetch("/api/chat", {
+    const response = await fetch("https://runimzo-toons.vercel.app/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
