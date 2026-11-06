@@ -419,7 +419,18 @@ async function sendZoggGtQuestion() {
       })
     });
 
-    const data = await response.json();
+    const raw = await response.text();
+
+let data;
+
+try {
+  data = JSON.parse(raw);
+} catch (e) {
+  throw new Error(
+    "HTTP " + response.status +
+    " | Server response: " + raw.slice(0, 200)
+  );
+}
 
     if (!response.ok) {
       throw new Error(data.error || "API Error");
