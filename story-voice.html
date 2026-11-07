@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZOGGGT STORY VOICE AI</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: #101526;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  max-width: 650px;
+  margin: auto;
+  background: #202b43;
+  padding: 22px;
+  border-radius: 16px;
+}
+
+h1 {
+  text-align: center;
+  color: #00e5ff;
+}
+
+.subtitle {
+  text-align: center;
+  color: #ddd;
+}
+
+textarea {
+  width: 100%;
+  height: 180px;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 17px;
+  margin-top: 12px;
+}
+
+select, button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 13px;
+  border: none;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+button {
+  background: #00d4ff;
+  color: #101526;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+#status {
+  margin-top: 15px;
+  text-align: center;
+  color: #ffe082;
+}
+
+audio {
+  width: 100%;
+  margin-top: 18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎙️ ZOGGGT STORY VOICE AI</h1>
+
+<p class="subtitle">
+বাংলা গল্পকে কণ্ঠস্বরে পরিণত করো
+</p>
+
+<textarea id="story"
+placeholder="এখানে তোমার বাংলা গল্প লিখো..."></textarea>
+
+<select id="voice">
+  <option value="">Voice নির্বাচন করো</option>
+</select>
+
+<button id="preview">🔊 Voice Demo শুনুন</button>
+
+<button id="generate">🎙️ Generate Voice</button>
+
+<div id="status">Voice প্রস্তুত হচ্ছে...</div>
+
+<audio id="player" controls></audio>
+
+<button id="download" hidden>
+⬇️ Download Audio
+</button>
+
+</div>
+
+<script>
+const voiceSelect = document.getElementById("voice");
+const statusBox = document.getElementById("status");
+const player = document.getElementById("player");
+
+let voices = [];
+
+function loadVoices() {
+  voices = speechSynthesis.getVoices();
+
+  voiceSelect.innerHTML =
+    '<option value="">Voice নির্বাচন করো</option>';
+
+  const bengaliVoices = voices.filter(v =>
+    v.lang.toLowerCase().startsWith("bn")
+  );
+
+  bengaliVoices.forEach((voice, index) => {
+    const option = document.createElement("option");
+    option.value = index;
+    option.textContent = voice.name + " (" + voice.lang + ")";
+    voiceSelect.appendChild(option);
+  });
+
+  statusBox.textContent =
+    bengaliVoices.length
+    ? bengaliVoices.length + "টি বাংলা Voice পাওয়া গেছে।"
+    : "এই ডিভাইসে বাংলা Voice পাওয়া যায়নি।";
+}
+
+speechSynthesis.onvoiceschanged = loadVoices;
+loadVoices();
+
+document.getElementById("preview").onclick = () => {
+  const text = "নমস্কার! আমি ZOGGGT STORY VOICE AI।";
+
+  const selected = voices.filter(v =>
+    v.lang.toLowerCase().startsWith("bn")
+  )[Number(voiceSelect.value)];
+
+  if (!selected) {
+    statusBox.textContent = "আগে একটি বাংলা Voice নির্বাচন করো।";
+    return;
+  }
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.voice = selected;
+  utterance.lang = selected.lang;
+
+  speechSynthesis.cancel();
+  speechSynthesis.speak(utterance);
+};
+
+document.getElementById("generate").onclick = () => {
+  const text = document.getElementById("story").value.trim();
+
+  if (!text) {
+    statusBox.textContent = "আগে গল্প লিখো।";
+    return;
+  }
+
+  const selected = voices.filter(v =>
+    v.lang.toLowerCase().startsWith("bn")
+  )[Number(voiceSelect.value)];
+
+  if (!selected) {
+    statusBox.textContent = "বাংলা Voice নির্বাচন করো।";
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.voice = selected;
+  utterance.lang = selected.lang;
+
+  utterance.onstart = () => {
+    statusBox.textContent = "গল্প পড়া হচ্ছে...";
+  };
+
+  utterance.onend = () => {
+    statusBox.textContent =
+      "গল্প শোনা শেষ।";
+  };
+
+  utterance.onerror = () => {
+    statusBox.textContent =
+      "Voice তৈরি করা যায়নি। আবার চেষ্টা করো।";
+  };
+
+  speechSynthesis.speak(utterance);
+};
+
+document.getElementById("download").hidden = true;
+</script>
+
+</body>
+</html>
