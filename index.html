@@ -447,7 +447,31 @@ try {
       "ZOGGGT AI ERROR: " + error.message;
   }
 }
- 
+function openAnimater() {
+  const studio = document.getElementById("animaterStudio");
+  studio.style.display = "block";
+  studio.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+} 
 </script>
+
+<!-- ZOGGGT ANIMATER -->
+<section class="panel" id="zoggGtAnimater">
+  <h2>🎬 ZOGGGT ANIMATER</h2>
+  <p>নিজের কার্টুন তৈরি করো এবং 2D Animation বানাও!</p>
+
+  <button onclick="openAnimater()">
+    🚀 Open Animation Studio
+  </button>
+
+  <div id="animaterStudio" style="display:none">
+    <h3>Welcome to ZOGGGT ANIMATER</h3>
+    <p>তোমার Animation Studio তৈরি হচ্ছে।</p>
+  </div>
+</section>
+ 
 </body>
+ 
 </html>
