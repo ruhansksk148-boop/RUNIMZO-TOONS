@@ -447,31 +447,119 @@ try {
       "ZOGGGT AI ERROR: " + error.message;
   }
 }
+
 function openAnimater() {
   const studio = document.getElementById("animaterStudio");
   studio.style.display = "block";
-  studio.scrollIntoView({
-    behavior: "smooth",
-    block: "start"
-  });
-} 
+  studio.scrollIntoView({ behavior: "smooth" });
+}
+
+function updateCharacter() {
+  const type = document.getElementById("characterType").value;
+  const hair = document.getElementById("characterHair").value;
+  const eyes = document.getElementById("characterEyes").value;
+  const clothes = document.getElementById("characterClothes").value;
+
+  const face = type === "Human" ? "🧑" :
+               type === "Animal" ? "🐱" : "🐶";
+
+  document.getElementById("characterPreview").innerHTML =
+    `<div style="font-size:85px">${face}</div>
+     <p>Hair: ${hair}</p>
+     <p>Eyes: ${eyes}</p>
+     <p>Clothes: ${clothes}</p>`;
+}
+
+function saveCharacter() {
+  const character = {
+    type: document.getElementById("characterType").value,
+    hair: document.getElementById("characterHair").value,
+    eyes: document.getElementById("characterEyes").value,
+    clothes: document.getElementById("characterClothes").value
+  };
+
+  let saved = JSON.parse(localStorage.getItem("zgCharacters") || "[]");
+  saved.push(character);
+  localStorage.setItem("zgCharacters", JSON.stringify(saved));
+
+  showCharacters();
+  alert("Character saved successfully!");
+}
+
+function showCharacters() {
+  const saved = JSON.parse(localStorage.getItem("zgCharacters") || "[]");
+
+  document.getElementById("savedCharacters").innerHTML =
+    saved.map((c, i) =>
+      `<div class="card">
+        <h3>Character ${i + 1}</h3>
+        <p>${c.type} | ${c.hair} | ${c.eyes} | ${c.clothes}</p>
+      </div>`
+    ).join("");
+}
+
 </script>
 
 <!-- ZOGGGT ANIMATER -->
 <section class="panel" id="zoggGtAnimater">
+
   <h2>🎬 ZOGGGT ANIMATER</h2>
-  <p>নিজের কার্টুন তৈরি করো এবং 2D Animation বানাও!</p>
+  <p>Complete 2D Cartoon Animation Studio</p>
 
   <button onclick="openAnimater()">
     🚀 Open Animation Studio
   </button>
 
   <div id="animaterStudio" style="display:none">
-    <h3>Welcome to ZOGGGT ANIMATER</h3>
-    <p>তোমার Animation Studio তৈরি হচ্ছে।</p>
+
+    <h2>🎨 Character Maker</h2>
+
+    <label>Character Type</label>
+    <select id="characterType" onchange="updateCharacter()">
+      <option>Human</option>
+      <option>Animal</option>
+      <option>Dog</option>
+    </select>
+
+    <label>Hair Style</label>
+    <select id="characterHair" onchange="updateCharacter()">
+      <option>Normal</option>
+      <option>Short</option>
+      <option>Long</option>
+      <option>Curly</option>
+    </select>
+
+    <label>Eyes</label>
+    <select id="characterEyes" onchange="updateCharacter()">
+      <option>Normal</option>
+      <option>Big</option>
+      <option>Small</option>
+    </select>
+
+    <label>Clothes</label>
+    <select id="characterClothes" onchange="updateCharacter()">
+      <option>Normal</option>
+      <option>Shirt</option>
+      <option>School Dress</option>
+      <option>Superhero Dress</option>
+    </select>
+
+    <h3>👀 Character Preview</h3>
+
+    <div id="characterPreview"
+      style="background:#35274c;padding:20px;border-radius:12px;text-align:center">
+    </div>
+
+    <button onclick="saveCharacter()">
+      💾 Save Character
+    </button>
+
+    <h3>📚 My Characters</h3>
+    <div id="savedCharacters"></div>
+
   </div>
 </section>
- 
+
 </body>
- 
 </html>
+
